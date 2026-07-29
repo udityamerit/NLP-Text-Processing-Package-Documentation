@@ -11,9 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeBtn  = document.getElementById('theme-toggle-btn');
     const themeIcon = document.getElementById('theme-icon');
 
-    const savedTheme      = localStorage.getItem('docs-theme');
-    const systemDark      = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let   currentTheme    = savedTheme || (systemDark ? 'dark' : 'light');
+    const savedTheme   = localStorage.getItem('docs-theme');
+    let   currentTheme = savedTheme || 'light';
 
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
