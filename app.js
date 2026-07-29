@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeBtn  = document.getElementById('theme-toggle-btn');
     const themeIcon = document.getElementById('theme-icon');
 
-    const savedTheme   = localStorage.getItem('docs-theme');
-    let   currentTheme = savedTheme || 'light';
-
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         if (themeIcon) {
@@ -22,12 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('docs-theme', theme);
     }
 
-    applyTheme(currentTheme);
+    // Sync icon with currently active theme
+    const activeTheme = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(activeTheme);
 
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
-            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-            applyTheme(currentTheme);
+            const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+            const nextTheme = current === 'dark' ? 'light' : 'dark';
+            applyTheme(nextTheme);
         });
     }
 
