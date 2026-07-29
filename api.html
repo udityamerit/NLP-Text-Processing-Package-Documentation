@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference — NLP Text Preprocessing</title>
+    <meta name="description" content="Complete API reference for all 60+ functions in the nlp-text-preprocessing Python library. Grouped by capability: feature extraction, text cleaning, and linguistic tools.">
+    <meta name="keywords" content="NLP API, text preprocessing functions, Python NLP, word count, lemmatize, remove URLs, NER, POS tagging">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="nlp_logo.png">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <button class="mobile-toggle" id="mobile-menu-btn" type="button" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
+            <a href="index.html" class="nav-brand">
+                <img src="nlp_logo.png" alt="nlp-text-preprocessing logo" class="brand-logo-img">
+                <span>nlp-text-preprocessing</span>
+            </a>
+        </div>
+
+        <div class="nav-controls">
+            <a href="https://pepy.tech/projects/nlp-text-preprocessing" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-analytics" aria-label="PePy Analytics">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                <span>PePy Analytics</span>
+            </a>
+            <a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-pypi" aria-label="PyPI Package">
+                <i class="fas fa-box" aria-hidden="true"></i>
+                <span>PyPI Package</span>
+            </a>
+            <a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-github" aria-label="GitHub Repository">
+                <i class="fab fa-github" aria-hidden="true"></i>
+                <span>GitHub Repo</span>
+            </a>
+            <button class="btn-icon" id="theme-toggle-btn" type="button" aria-label="Toggle Dark/Light Mode">
+                <span id="theme-icon" aria-hidden="true">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Documentation</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="index.html" class="sidebar-link"><i class="fas fa-home" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Introduction &amp; Setup</span></a></li>
+                    <li><a href="guide.html" class="sidebar-link"><i class="fas fa-book-open" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Usage Guide</span></a></li>
+                    <li><a href="api.html" class="sidebar-link active"><i class="fas fa-code" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>API Reference</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">API Categories</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="#feature-extraction" class="sidebar-link sub"><span>Feature Extraction</span></a></li>
+                    <li><a href="#cleaning" class="sidebar-link sub"><span>Text Cleaning</span></a></li>
+                    <li><a href="#linguistic" class="sidebar-link sub"><span>Linguistic Tools</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Project Links</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="https://pepy.tech/projects/nlp-text-preprocessing" target="_blank" class="sidebar-link"><i class="fas fa-chart-bar" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PePy Analytics</span></a></li>
+                    <li><a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" class="sidebar-link"><i class="fas fa-box" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PyPI Package</span></a></li>
+                    <li><a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank" class="sidebar-link"><i class="fab fa-github" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>GitHub Repository</span></a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content">
+
+            <!-- Page Header -->
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html" style="border-bottom: none; font-size: inherit; font-weight: 400; color: var(--text-muted);">Home</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span style="color: var(--text-main); font-weight: 600;">API Reference</span>
+            </nav>
+
+            <h1 style="margin-top: 0;">API Reference</h1>
+            <p>Complete reference for all functions in the <code>nlp_text_preprocessing</code> library. Functions are grouped logically by capability — each is fully null-safe and ready for use with Pandas <code>.apply()</code>.</p>
+
+            <div class="alert" role="note" aria-label="Null safety guarantee" style="margin-bottom: 12px;">
+                <div class="alert-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> Null Safety Guarantee</div>
+                <p>All functions accept <code>None</code> or <code>np.nan</code> values gracefully, returning empty strings or zeros instead of throwing exceptions. This makes it completely safe to use <code>.apply()</code> on messy pandas datasets.</p>
+            </div>
+
+            <div class="alert alert-info" role="note" aria-label="Interactive Code Examples tip" style="margin-bottom: 32px;">
+                <div class="alert-title"><i class="fas fa-lightbulb" aria-hidden="true"></i> Interactive Code Examples</div>
+                <p>Click on any function name in the reference tables below to open an interactive code popup with a copyable Python usage example and live output demonstration.</p>
+            </div>
+
+            <!-- Category 1: Feature Extraction -->
+            <section id="feature-extraction" aria-labelledby="feat-heading">
+                <h2 id="feat-heading">
+                    <i class="fas fa-chart-bar" aria-hidden="true" style="color: var(--accent-cyan); margin-right: 10px;"></i>
+                    1. General Feature Extraction
+                </h2>
+                <p>Extract statistical features, readability scores, and basic counts from your raw text.</p>
+
+                <div class="table-wrapper" role="region" aria-label="Feature extraction functions">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Function</th>
+                                <th scope="col">Parameters</th>
+                                <th scope="col">Return Type</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="word_count" type="button" title="Click to view code example"><code>word_count(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns total whitespace-separated word count.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="char_count" type="button" title="Click to view code example"><code>char_count(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns total characters excluding spaces.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="avg_word_len" type="button" title="Click to view code example"><code>avg_word_len(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
+                                <td>Returns average word length (0.0 for empty inputs).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="stop_words_count" type="button" title="Click to view code example"><code>stop_words_count(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns count of stop words (case-insensitive).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="sentence_count" type="button" title="Click to view code example"><code>sentence_count(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns total number of sentences.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="avg_sentence_len" type="button" title="Click to view code example"><code>avg_sentence_len(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
+                                <td>Returns average sentence length in words.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="text_stats_batch" type="button" title="Click to view code example"><code>text_stats_batch(df, col)</code></button></td>
+                                <td><code>df, col</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">DataFrame</span></td>
+                                <td>Returns a DataFrame of stats for a pandas DataFrame column.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Category 2: Text Cleaning -->
+            <section id="cleaning" aria-labelledby="clean-heading">
+                <h2 id="clean-heading">
+                    <i class="fas fa-broom" aria-hidden="true" style="color: var(--accent-emerald); margin-right: 10px;"></i>
+                    2. Text Cleaning and Normalization
+                </h2>
+                <p>Powerful utilities for sanitizing web scraping artifacts, social media tokens, and special characters.</p>
+
+                <div class="table-wrapper" role="region" aria-label="Text cleaning functions">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Function</th>
+                                <th scope="col">Parameters</th>
+                                <th scope="col">Return Type</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="to_lower_case" type="button" title="Click to view code example"><code>to_lower_case(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Converts input text to lowercase.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="contraction_to_expansion" type="button" title="Click to view code example"><code>contraction_to_expansion(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Expands contractions using a contractions dictionary.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_emails" type="button" title="Click to view code example"><code>remove_emails(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Removes all email addresses from text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_urls" type="button" title="Click to view code example"><code>remove_urls(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Removes HTTP/HTTPS links and www URLs.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_html_tag" type="button" title="Click to view code example"><code>remove_html_tag(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Strips HTML/XML tags using BeautifulSoup.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_accented_chars" type="button" title="Click to view code example"><code>remove_accented_chars(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Normalizes accented characters (NFKD &rarr; ASCII).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="clean_text" type="button" title="Click to view code example"><code>clean_text(text)</code></button></td>
+                                <td><code>text: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Runs the default end-to-end cleaning pipeline.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Category 3: Linguistic Processing -->
+            <section id="linguistic" aria-labelledby="ling-heading">
+                <h2 id="ling-heading">
+                    <i class="fas fa-language" aria-hidden="true" style="color: var(--accent-violet); margin-right: 10px;"></i>
+                    3. Linguistic Processing
+                </h2>
+                <p>NLP-centric transformations powered by spaCy and NLTK for core linguistic analysis.</p>
+
+                <div class="alert alert-warning" role="note">
+                    <div class="alert-title"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> spaCy Model Required</div>
+                    <p>These functions require the <code>en_core_web_sm</code> model. Run <code>python -m spacy download en_core_web_sm</code> before first use.</p>
+                </div>
+
+                <div class="table-wrapper" role="region" aria-label="Linguistic processing functions">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Function</th>
+                                <th scope="col">Parameters</th>
+                                <th scope="col">Return Type</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="convert_to_base" type="button" title="Click to view code example"><code>convert_to_base(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Lemmatizes nouns and verbs via spaCy while keeping other POS tags.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="extract_ner" type="button" title="Click to view code example"><code>extract_ner(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list</span></td>
+                                <td>Extracts Named Entities (Persons, Orgs, Locations) as a list of tuples.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="extract_pos" type="button" title="Click to view code example"><code>extract_pos(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list</span></td>
+                                <td>Returns a list of tuples with Part-Of-Speech tagging for each token.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Page Navigation -->
+            <nav class="page-nav" aria-label="Page navigation">
+                <a href="guide.html" class="page-nav-btn prev">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    <span>Usage Guide</span>
+                </a>
+                <a href="index.html" class="page-nav-btn next">
+                    <span>Overview</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </nav>
+
+        </main>
+    </div>
+
+    <!-- Code Example Modal Popup -->
+    <div class="api-modal-overlay" id="api-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-func-title">
+        <div class="api-modal-container">
+            <div class="api-modal-header">
+                <div>
+                    <div class="api-modal-badge" id="modal-func-badge">FUNCTION REFERENCE</div>
+                    <h3 class="api-modal-title" id="modal-func-title">Function Example</h3>
+                </div>
+                <button class="api-modal-close" id="api-modal-close" type="button" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="api-modal-body">
+                <p class="api-modal-desc" id="modal-func-desc"></p>
+                <div class="code-block-wrapper">
+                    <div class="code-block-header">
+                        <div class="code-block-header-left">
+                            <div class="code-dots">
+                                <span class="code-dot code-dot-red"></span>
+                                <span class="code-dot code-dot-yellow"></span>
+                                <span class="code-dot code-dot-green"></span>
+                            </div>
+                            <span class="code-lang-badge">PYTHON</span>
+                        </div>
+                        <button class="code-copy-btn" id="modal-copy-btn" type="button" aria-label="Copy example code">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                            <span>Copy</span>
+                        </button>
+                    </div>
+                    <pre><code class="language-python" id="modal-func-code"></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
+    <script src="app.js" defer></script>
+</body>
+</html>

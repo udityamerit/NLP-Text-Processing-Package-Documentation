@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nlp-text-preprocessing — Documentation</title>
+    <meta name="description" content="Production-grade, modular Python library designed to streamline text cleaning, feature extraction, and linguistic analysis. 60+ functions, crash-proof pipeline.">
+    <meta name="keywords" content="NLP, nlp-text-preprocessing, text preprocessing, Python, natural language processing, pandas, pipeline, tokenization, lemmatization">
+    <meta property="og:title" content="nlp-text-preprocessing — Documentation">
+    <meta property="og:description" content="Production-grade Python NLP library. 60+ functions, 1-line pipeline, 100% DataFrame safe.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="nlp_logo.png">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": "nlp-text-preprocessing",
+      "description": "Production-grade, modular Python library for NLP text cleaning, feature extraction, and linguistic analysis.",
+      "programmingLanguage": "Python",
+      "url": "https://pypi.org/project/nlp-text-preprocessing/"
+    }
+    </script>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <button class="mobile-toggle" id="mobile-menu-btn" type="button" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
+            <a href="index.html" class="nav-brand">
+                <img src="nlp_logo.png" alt="nlp-text-preprocessing logo" class="brand-logo-img">
+                <span>nlp-text-preprocessing</span>
+            </a>
+        </div>
+
+        <div class="nav-controls">
+            <a href="https://pepy.tech/projects/nlp-text-preprocessing?timeRange=threeMonths&category=version&includeCIDownloads=true&granularity=weekly&viewType=line&versions=Total%2C0.*"
+                target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-analytics"
+                aria-label="View PePy Analytics">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                <span>PePy Analytics</span>
+            </a>
+            <a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" rel="noopener noreferrer"
+                class="nav-link-btn btn-pypi" aria-label="View on PyPI">
+                <i class="fas fa-box" aria-hidden="true"></i>
+                <span>PyPI Package</span>
+            </a>
+            <a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank"
+                rel="noopener noreferrer" class="nav-link-btn btn-github" aria-label="View GitHub Repository">
+                <i class="fab fa-github" aria-hidden="true"></i>
+                <span>GitHub Repo</span>
+            </a>
+            <button class="btn-icon" id="theme-toggle-btn" type="button" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+                <span id="theme-icon" aria-hidden="true">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Documentation</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="index.html" class="sidebar-link active"><i class="fas fa-home" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Introduction &amp; Setup</span></a></li>
+                    <li><a href="guide.html" class="sidebar-link"><i class="fas fa-book-open" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Usage Guide</span></a></li>
+                    <li><a href="api.html" class="sidebar-link"><i class="fas fa-code" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>API Reference</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Quick Start</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="#installation" class="sidebar-link sub"><span>Installation</span></a></li>
+                    <li><a href="#features" class="sidebar-link sub"><span>Key Features</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Project Links</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="https://pepy.tech/projects/nlp-text-preprocessing" target="_blank" class="sidebar-link"><i class="fas fa-chart-bar" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PePy Analytics</span></a></li>
+                    <li><a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" class="sidebar-link"><i class="fas fa-box" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PyPI Package</span></a></li>
+                    <li><a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank" class="sidebar-link"><i class="fab fa-github" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>GitHub Repository</span></a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Sidebar Overlay (Mobile) -->
+        <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content">
+
+            <!-- Hero Section -->
+            <section class="hero" aria-labelledby="hero-heading">
+                <div class="badge-version">
+                    <i class="fas fa-star" aria-hidden="true" style="margin-right:6px;"></i>
+                    Python Framework for NLP Cleaning
+                </div>
+                <h1 class="hero-title" id="hero-heading">
+                    <span class="gradient-text">nlp-text-preprocessing</span><br>Documentation
+                </h1>
+                <p class="hero-subtitle">
+                    A production-grade, modular Python library designed to streamline text cleaning,
+                    feature extraction, linguistic analysis, and validation. 100% crash-proof when
+                    running over Pandas DataFrames.
+                </p>
+
+                <div class="hero-cta-group" style="display: flex; justify-content: center; margin-bottom: 2.5rem; gap: 16px; flex-wrap: wrap;">
+                    <a href="guide.html" class="nav-link-btn btn-pypi" style="font-size: 1.1rem; padding: 14px 28px; border-radius: 12px; height: auto;" aria-label="Get started with the usage guide">
+                        <i class="fas fa-rocket" aria-hidden="true"></i>
+                        <span>Get Started</span>
+                    </a>
+                    <a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-github" style="font-size: 1.1rem; padding: 14px 28px; border-radius: 12px; height: auto;" aria-label="View package on PyPI">
+                        <i class="fas fa-box" aria-hidden="true"></i>
+                        <span>View on PyPI</span>
+                    </a>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="stats-row" role="list" aria-label="Package statistics">
+                    <div class="stat-card" role="listitem">
+                        <span class="stat-val" data-count="60" data-suffix="+">60+</span>
+                        <span class="stat-label">Functions</span>
+                    </div>
+                    <div class="stat-card" role="listitem">
+                        <span class="stat-val">1-Line</span>
+                        <span class="stat-label">Pipeline Engine</span>
+                    </div>
+                    <div class="stat-card" role="listitem">
+                        <span class="stat-val" data-count="100" data-suffix="%">100%</span>
+                        <span class="stat-label">DataFrame Safe</span>
+                    </div>
+                    <a href="https://pepy.tech/projects/nlp-text-preprocessing"
+                        target="_blank" rel="noopener noreferrer" class="stat-card"
+                        style="text-decoration: none; border: 1px solid rgba(6, 182, 212, 0.3); background: rgba(6, 182, 212, 0.05);"
+                        aria-label="View download analytics on PePy">
+                        <span class="stat-val" style="color: var(--accent-cyan);">PePy</span>
+                        <span class="stat-label">Analytics &rarr;</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- OS Platform Switcher / Installation -->
+            <section id="installation" style="margin-top: 60px;" aria-labelledby="install-heading">
+                <h2 id="install-heading">
+                    <i class="fas fa-download" aria-hidden="true" style="color: var(--accent-cyan); margin-right: 10px;"></i>
+                    Installation Guide
+                </h2>
+                <p>Choose your operating system to see the recommended installation steps. We highly recommend using a virtual environment to prevent dependency conflicts.</p>
+
+                <div class="install-hub" role="region" aria-label="OS-specific installation instructions">
+                    <div class="install-tab-bar" role="tablist" aria-label="Operating system selection">
+                        <button class="install-tab active" type="button" data-os="windows" role="tab" aria-selected="true" aria-controls="install-panel" id="tab-windows" onclick="switchInstallOS('windows')">
+                            <i class="fab fa-windows" aria-hidden="true"></i> Windows
+                        </button>
+                        <button class="install-tab" type="button" data-os="mac" role="tab" aria-selected="false" aria-controls="install-panel" id="tab-mac" onclick="switchInstallOS('mac')">
+                            <i class="fab fa-apple" aria-hidden="true"></i> macOS
+                        </button>
+                        <button class="install-tab" type="button" data-os="linux" role="tab" aria-selected="false" aria-controls="install-panel" id="tab-linux" onclick="switchInstallOS('linux')">
+                            <i class="fab fa-linux" aria-hidden="true"></i> Linux
+                        </button>
+                        <button class="install-tab" type="button" data-os="conda" role="tab" aria-selected="false" aria-controls="install-panel" id="tab-conda" onclick="switchInstallOS('conda')">
+                            <i class="fas fa-cube" aria-hidden="true"></i> Conda
+                        </button>
+                    </div>
+
+                    <div class="install-panel" id="install-panel" role="tabpanel">
+                        <div class="install-panel-top">
+                            <div class="install-panel-top-left">
+                                <div class="terminal-dots" aria-hidden="true">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                </div>
+                                <span class="terminal-label" id="terminal-label">Windows PowerShell</span>
+                            </div>
+                            <button class="btn-copy terminal-copy-btn" id="copy-install-btn" type="button" aria-label="Copy installation command to clipboard">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                                <span>Copy</span>
+                            </button>
+                        </div>
+                        <div class="terminal-body">
+                            <span class="terminal-prompt" id="install-prompt" aria-hidden="true">PS C:\&gt;</span>
+                            <code class="install-cmd" id="install-command" aria-label="Installation command">python -m venv venv<br>.\\venv\\Scripts\\activate<br>pip install nlp-text-preprocessing</code>
+                        </div>
+                        <p class="install-hint" id="install-subtext">Recommended for Windows PowerShell.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Features Grid -->
+            <section id="features" style="margin-top: 60px;" aria-labelledby="features-heading">
+                <h2 id="features-heading">
+                    <i class="fas fa-star" aria-hidden="true" style="color: var(--accent-emerald); margin-right: 10px;"></i>
+                    Key Features
+                </h2>
+                <p>Everything you need to build robust NLP preprocessing pipelines — from simple cleaning to advanced linguistic analysis.</p>
+
+                <div class="feature-grid" role="list">
+                    <article class="feature-card" role="listitem">
+                        <div class="feature-icon" aria-hidden="true"><i class="fas fa-shield-alt"></i></div>
+                        <h3 class="feature-title">Crash-Proof Pipeline</h3>
+                        <p>Automatic None/NaN input sanitation across all functions. Safely processes huge Pandas DataFrames without failing on dirty or null rows.</p>
+                        <span class="badge-success" style="margin-top: 8px;">DataFrame Safe</span>
+                    </article>
+                    <article class="feature-card" role="listitem">
+                        <div class="feature-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-emerald);" aria-hidden="true"><i class="fas fa-cogs"></i></div>
+                        <h3 class="feature-title">Automation Engine</h3>
+                        <p>Chain cleaning steps by name or custom functions via <code>Pipeline(['to_lower_case', 'remove_urls', 'lemmatize'])</code> — no boilerplate needed.</p>
+                        <span class="badge-success" style="margin-top: 8px;">1-Line Pipelines</span>
+                    </article>
+                    <article class="feature-card" role="listitem">
+                        <div class="feature-icon" style="background: rgba(124, 58, 237, 0.1); color: var(--accent-violet);" aria-hidden="true"><i class="fas fa-bolt"></i></div>
+                        <h3 class="feature-title">Fast &amp; Lazy Caching</h3>
+                        <p>Efficient lazy-loading for spaCy (<code>en_core_web_sm</code>) and cached NaiveBayes sentiment analyzers to save memory and reduce startup time.</p>
+                        <span class="badge-version" style="margin-top: 8px; color: var(--accent-violet); border-color: rgba(124,58,237,0.2); background: rgba(124,58,237,0.08);">60+ Functions</span>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Setup Scripts (init copy button) -->
+            <script>
+                const copyInstallBtn = document.getElementById('copy-install-btn');
+                if (copyInstallBtn) {
+                    copyInstallBtn.onclick = function() {
+                        const text = "python -m venv venv\n.\\venv\\Scripts\\activate\npip install nlp-text-preprocessing";
+                        navigator.clipboard.writeText(text).then(() => {
+                            const originalHtml = this.innerHTML;
+                            this.innerHTML = '<span style="color:var(--accent-emerald)">✓ Copied!</span>';
+                            setTimeout(() => { this.innerHTML = originalHtml; }, 2000);
+                        });
+                    };
+                }
+            </script>
+
+            <!-- Page Navigation -->
+            <nav class="page-nav" aria-label="Page navigation">
+                <a href="guide.html" class="page-nav-btn next">
+                    <span>Usage Guide</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </nav>
+
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
+    <script src="app.js" defer></script>
+</body>
+</html>

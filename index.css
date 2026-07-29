@@ -1,0 +1,2048 @@
+/* ==========================================================================
+   NLP Text Preprocessing Documentation
+   Design System: Multimodel Analysis — Enterprise Edition
+   Aligned to DESIGN.md specification v1.0
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* ==========================================================================
+   1. DESIGN TOKENS — Light Theme (Default)
+   ========================================================================== */
+:root {
+    /* — Primary Palette — */
+    --color-slate-900: #0F172A;
+    --color-slate-700: #334155;
+    --color-slate-600: #475569;
+    --color-slate-200: #E2E8F0;
+    --color-slate-100: #F1F5F9;
+    --color-slate-50:  #F8FAFC;
+    --color-white:     #FFFFFF;
+    --color-black:     #000000;
+
+    /* — Accent Palette — */
+    --color-cyan-600:    #0284C7;
+    --color-cyan-500:    #06B6D4;
+    --color-emerald-600: #059669;
+    --color-emerald-500: #10B981;
+    --color-rose-500:    #F43F5E;
+    --color-amber-600:   #D97706;
+    --color-violet-600:  #7C3AED;
+
+    /* — Semantic Status — */
+    --color-success: #28C840;
+    --color-error:   #E11D48;
+    --color-warning: #F59E0B;
+
+    /* — Surface & Border — */
+    --surface-primary:   var(--color-white);
+    --surface-secondary: var(--color-slate-50);
+    --border-subtle:     var(--color-slate-200);
+    --border-strong:     rgba(15, 23, 42, 0.08);
+
+    /* — Semantic Aliases (used throughout) — */
+    --bg-obsidian:       var(--color-slate-50);
+    --bg-surface:        var(--color-white);
+    --bg-card:           rgba(255, 255, 255, 0.85);
+    --glass-bg:          rgba(255, 255, 255, 0.9);
+    --glass-border:      rgba(0, 0, 0, 0.08);
+    --glass-border-hover: rgba(6, 182, 212, 0.5);
+
+    --accent-cyan:          var(--color-cyan-600);
+    --accent-cyan-light:    var(--color-cyan-500);
+    --accent-cyan-glow:     rgba(6, 182, 212, 0.35);
+    --accent-emerald:       var(--color-emerald-600);
+    --accent-emerald-light: var(--color-emerald-500);
+    --accent-emerald-glow:  rgba(16, 185, 129, 0.35);
+    --accent-violet:        var(--color-violet-600);
+    --accent-rose:          var(--color-rose-500);
+    --accent-amber:         var(--color-amber-600);
+
+    /* — Gradients — */
+    --accent-gradient: linear-gradient(135deg, var(--color-cyan-600), var(--color-emerald-500));
+    --hero-gradient:   linear-gradient(135deg, #06B6D4 0%, #3B82F6 50%, #8B5CF6 100%);
+    --platform-gradient: linear-gradient(135deg, #0284C7 0%, #06B6D4 100%);
+
+    /* — Typography — */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --font-mono: 'Fira Code', 'Courier New', monospace;
+    --font-system: Arial, Helvetica, sans-serif;
+
+    --text-main:     var(--color-slate-900);
+    --text-muted:    var(--color-slate-700);
+    --text-dim:      var(--color-slate-600);
+    --text-on-accent: var(--color-white);
+
+    /* — Typography Scale (DESIGN.md §3) — */
+    --fs-display: 4rem;       /* 64px — H1 / Hero */
+    --fs-h2:      2rem;       /* 32px — Section */
+    --fs-h3:      1.2rem;     /* 19.2px — Subtitle */
+    --fs-body:    1.35rem;    /* 21.6px — Body copy */
+    --fs-label:   1.25rem;    /* 20px — Bold label */
+    --fs-small:   0.85rem;    /* 13.6px — Helper/caption */
+    --fs-list:    1rem;       /* 16px — List/nav */
+    --fs-btn:     1.5rem;     /* 24px — Primary button (Arial) */
+    --fs-btn-alt: 0.875rem;   /* 14px — Secondary button (Inter) */
+    --fs-code:    1rem;       /* 16px — Code block */
+    --fs-code-inline: 0.82rem; /* 13.12px — Inline code */
+
+    /* — Line Heights — */
+    --lh-display: 1.15;
+    --lh-h2:      1.6;
+    --lh-body:    1.6;
+    --lh-code:    1.6;
+
+    /* — Shadow System (DESIGN.md §6) — */
+    --shadow-level0: none;
+    --shadow-level1: rgba(0, 0, 0, 0.05) 0px 4px 6px -1px;
+    --shadow-level2: rgba(16, 185, 129, 0.25) 0px 4px 15px 0px;
+    --shadow-level3: rgb(2, 132, 199) 0px -1px 0px 0px;
+    --shadow-level4: rgba(0, 0, 0, 0.15) 0px 10px 25px 0px;
+
+    /* — Legacy aliases — */
+    --shadow-sm: var(--shadow-level1);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+    --shadow-lg: var(--shadow-level4);
+    --shadow-glow: 0 0 25px var(--accent-cyan-glow);
+
+    /* — Code & Table — */
+    --code-bg:       var(--color-slate-50);
+    --code-header:   var(--color-slate-200);
+    --table-header:  var(--color-slate-200);
+    --table-row-even: rgba(0, 0, 0, 0.02);
+    --table-row-hover: rgba(6, 182, 212, 0.08);
+
+    /* — Code Block Theme (light) — */
+    --cb-bg:           #f6f8fa;          /* GitHub Light body */
+    --cb-header-bg:    #eaeef2;          /* GitHub Light header */
+    --cb-border:       rgba(0, 0, 0, 0.1);
+    --cb-header-sep:   rgba(0, 0, 0, 0.08);
+    --cb-gutter:       rgba(2, 132, 199, 0.35);
+    --cb-text:         #24292f;          /* GitHub Light base text */
+    --cb-dot-ring:     rgba(0,0,0,0.15);
+    --cb-badge-color:  rgba(0, 0, 0, 0.4);
+    --cb-copy-bg:      rgba(0, 0, 0, 0.05);
+    --cb-copy-border:  rgba(0, 0, 0, 0.12);
+    --cb-copy-color:   rgba(0, 0, 0, 0.45);
+    --cb-scrollbar:    rgba(0, 0, 0, 0.15);
+    /* Syntax — GitHub Light palette */
+    --cb-s-comment:    #6e7781;
+    --cb-s-keyword:    #cf222e;
+    --cb-s-string:     #0a3069;
+    --cb-s-function:   #8250df;
+    --cb-s-number:     #0550ae;
+    --cb-s-class:      #953800;
+    --cb-s-operator:   #0550ae;
+    --cb-s-punctuation:#24292f;
+    --cb-s-inserted:   #116329;
+    --cb-s-deleted:    #82071e;
+
+    /* — Transitions — */
+    --transition-fast:   0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* — Layout — */
+    --navbar-height:  72px;
+    --sidebar-width:  280px;
+    --content-max:    1400px;
+}
+
+/* ==========================================================================
+   2. DARK THEME OVERRIDES
+   ========================================================================== */
+[data-theme="dark"] {
+    --bg-obsidian:    #0b0f19;
+    --bg-surface:     #111827;
+    --bg-card:        rgba(17, 24, 39, 0.75);
+    --glass-bg:       rgba(15, 23, 42, 0.85);
+    --glass-border:   rgba(255, 255, 255, 0.08);
+    --glass-border-hover: rgba(6, 182, 212, 0.4);
+
+    --surface-primary:   var(--bg-surface);
+    --surface-secondary: #0b0f19;
+    --border-subtle:     rgba(255, 255, 255, 0.1);
+    --border-strong:     rgba(255, 255, 255, 0.08);
+
+    --accent-cyan:          #06B6D4;
+    --accent-emerald:       #10B981;
+    --accent-violet:        #8B5CF6;
+    --accent-rose:          #F43F5E;
+    --accent-amber:         #F59E0B;
+
+    --text-main:   #F8FAFC;
+    --text-muted:  #94A3B8;
+    --text-dim:    #64748B;
+    --text-on-accent: #0F172A;
+
+    --code-bg:       #090e17;
+    --code-header:   #131d2e;
+    --table-header:  #162032;
+    --table-row-even: rgba(255, 255, 255, 0.02);
+    --table-row-hover: rgba(6, 182, 212, 0.06);
+
+    /* — Code Block Theme (dark) — */
+    --cb-bg:           #0d1117;          /* GitHub Dark body */
+    --cb-header-bg:    #161b22;          /* GitHub Dark header */
+    --cb-border:       rgba(255, 255, 255, 0.06);
+    --cb-header-sep:   rgba(255, 255, 255, 0.07);
+    --cb-gutter:       rgba(6, 182, 212, 0.25);
+    --cb-text:         #c9d1d9;          /* GitHub Dark base text */
+    --cb-dot-ring:     rgba(255,255,255,0.15);
+    --cb-badge-color:  rgba(255, 255, 255, 0.35);
+    --cb-copy-bg:      rgba(255, 255, 255, 0.06);
+    --cb-copy-border:  rgba(255, 255, 255, 0.1);
+    --cb-copy-color:   rgba(255, 255, 255, 0.45);
+    --cb-scrollbar:    rgba(255, 255, 255, 0.12);
+    /* Syntax — GitHub Dark palette */
+    --cb-s-comment:    #8b949e;
+    --cb-s-keyword:    #ff7b72;
+    --cb-s-string:     #a5d6ff;
+    --cb-s-function:   #d2a8ff;
+    --cb-s-number:     #79c0ff;
+    --cb-s-class:      #ffa657;
+    --cb-s-operator:   #79c0ff;
+    --cb-s-punctuation:#c9d1d9;
+    --cb-s-inserted:   #3fb950;
+    --cb-s-deleted:    #ffa198;
+
+    --shadow-level1: rgba(0, 0, 0, 0.3) 0px 4px 6px -1px;
+    --shadow-sm:     0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-md:     0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --shadow-lg:     0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   3. ACCESSIBILITY — prefers-reduced-motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==========================================================================
+   4. BASE RESET & GLOBAL
+   ========================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--navbar-height) + 24px);
+    font-size: 16px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-obsidian);
+    color: var(--text-main);
+    line-height: var(--lh-body);
+    width: 100%;
+    overflow-x: hidden;
+    transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-obsidian); }
+::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+/* Global Focus Ring (DESIGN.md §9, point 7) */
+:focus-visible {
+    outline: 2px solid var(--color-cyan-600);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   5. SCROLL PROGRESS BAR (Premium Enhancement)
+   ========================================================================== */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-cyan-600), var(--color-emerald-500));
+    z-index: 2000;
+    transition: width 0.1s linear;
+    border-radius: 0 2px 2px 0;
+}
+
+/* ==========================================================================
+   6. LAYOUT & GRID
+   ========================================================================== */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    padding-top: var(--navbar-height);
+}
+
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    padding: 40px 6% 80px 6%;
+    max-width: var(--content-max);
+}
+
+/* ==========================================================================
+   7. NAVBAR
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--navbar-height);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4%;
+    z-index: 1000;
+    transition: background var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: var(--fs-list);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    letter-spacing: 0;
+}
+
+.brand-logo {
+    width: 42px;
+    height: 42px;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px var(--accent-cyan-glow);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.brand-logo-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 0 12px var(--accent-cyan-glow);
+    transition: transform var(--transition-smooth);
+}
+
+.nav-brand:hover .brand-logo-img,
+.nav-brand:hover .brand-logo {
+    transform: scale(1.08) rotate(4deg);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+/* Hero logo styling */
+.hero-logo-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.hero-logo-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 24px;
+    object-fit: cover;
+    box-shadow:
+        0 0 35px var(--accent-cyan-glow),
+        0 0 70px rgba(16, 185, 129, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.hero-logo-img:hover {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow:
+        0 0 45px var(--accent-cyan-glow),
+        0 0 90px rgba(16, 185, 129, 0.4);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* — Icon Button (DESIGN.md §4 — Icon Button) — */
+.btn-icon {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-main);
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 13.3333px;
+    font-family: var(--font-system);
+    font-weight: 400;
+}
+
+.btn-icon:hover {
+    background: var(--color-slate-50);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: var(--accent-cyan);
+}
+
+/* — Nav Link Buttons (base) — */
+.nav-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: var(--fs-btn-alt);
+    font-weight: 600;
+    line-height: 22.4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    height: 40px;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+/* Cyan CTA (Primary) — DESIGN.md §4 Primary Button */
+.btn-analytics {
+    background-color: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.2);
+    color: var(--color-cyan-600);
+}
+.btn-analytics:hover {
+    background-color: rgba(6, 182, 212, 0.15);
+    border-color: rgba(6, 182, 212, 0.3);
+}
+.btn-analytics:active {
+    background-color: rgba(6, 182, 212, 0.2);
+    box-shadow: var(--shadow-level3);
+}
+
+/* Emerald Success — DESIGN.md §4 Secondary Button */
+.btn-pypi {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+    color: var(--color-emerald-600);
+}
+.btn-pypi:hover {
+    background-color: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: var(--shadow-level2);
+}
+
+/* Ghost White — DESIGN.md §4 Tertiary Button */
+.btn-github {
+    background-color: var(--color-white);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: var(--color-slate-900);
+}
+.btn-github:hover {
+    background-color: var(--color-slate-50);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .btn-github {
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    border-color: var(--glass-border);
+}
+[data-theme="dark"] .btn-github:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Mobile menu toggle */
+.mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+/* ==========================================================================
+   8. SIDEBAR NAVIGATION (DESIGN.md §4 — Navigation)
+   ========================================================================== */
+.sidebar {
+    position: fixed;
+    top: var(--navbar-height);
+    bottom: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    background: var(--surface-secondary);
+    border-right: 1px solid var(--glass-border);
+    padding: 32px 0;
+    overflow-y: auto;
+    z-index: 900;
+    transition: transform var(--transition-smooth);
+    /* DESIGN.md sidebar: bg #F8FAFC, padding 24px 16px, width 280px */
+}
+
+.sidebar-section { margin-bottom: 32px; }
+
+.sidebar-title {
+    padding: 0 24px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+}
+
+.sidebar-nav { list-style: none; }
+
+/* Inactive nav link */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px 8px 24px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: var(--fs-list);
+    font-weight: 400;
+    line-height: 25.6px;
+    border-left: 4px solid transparent;
+    border-radius: 0px 4px 4px 0px;
+    transition: all var(--transition-fast);
+}
+
+.sidebar-link:hover {
+    color: var(--text-main);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+/* Active nav link — DESIGN.md exact spec */
+.sidebar-link.active {
+    background-color: rgba(6, 182, 212, 0.1);
+    border-left: 4px solid var(--color-cyan-600);
+    color: var(--color-cyan-600);
+    font-weight: 500;
+}
+
+/* Nested sub-links */
+.sidebar-link.sub {
+    padding-left: 40px;
+    font-size: var(--fs-small);
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 800;
+}
+
+/* ==========================================================================
+   9. TYPOGRAPHY (DESIGN.md §3 — Full Scale)
+   ========================================================================== */
+h1, h2, h3, h4 {
+    font-family: var(--font-sans);
+    color: var(--text-main);
+    margin-bottom: 1rem;
+    letter-spacing: 0;
+}
+
+/* H1 — 64px, weight 800, lh 1.15 */
+h1 {
+    font-size: var(--fs-display);
+    font-weight: 800;
+    line-height: var(--lh-display);
+}
+
+/* H2 — 32px, weight 700, lh 1.6 */
+h2 {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    line-height: var(--lh-h2);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    margin-top: 3rem;
+}
+
+/* H3 — 19.2px, weight 700, lh 1.6 */
+h3 {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+/* Body — 21.6px, weight 400, lh 1.6 */
+p {
+    font-family: var(--font-sans);
+    color: var(--text-muted);
+    font-size: var(--fs-body);
+    font-weight: 400;
+    line-height: var(--lh-body);
+    margin-bottom: 1.5rem;
+    max-width: 80ch;
+}
+
+/* Inline code */
+code:not(pre code):not(.install-cmd):not(.terminal-body code) {
+    font-family: var(--font-mono);
+    font-size: var(--fs-code-inline);
+    line-height: 23.616px;
+    font-weight: 400;
+    background: var(--code-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: var(--text-main);
+}
+
+/* Code inside pre — strip all inline code borders, backgrounds, radii, and padding */
+pre code,
+pre code.hljs,
+.code-block-wrapper pre code {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    line-height: inherit !important;
+}
+
+/* Links — Primary (DESIGN.md §4 Text Link) */
+a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: var(--fs-btn-alt);
+    font-weight: 600;
+    line-height: 22.4px;
+    border-bottom: 1px solid transparent;
+    transition: all 150ms ease-in-out;
+}
+a:hover {
+    border-bottom-color: var(--color-cyan-600);
+    color: #006699;
+}
+
+/* Override: Nav links and structural links don't get underline treatment */
+.nav-brand, .nav-link-btn, .sidebar-link, .stat-card, .feature-card,
+.btn-icon, .install-tab, .btn-copy {
+    border-bottom: none;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: var(--hero-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+/* ==========================================================================
+   10. BADGES & PILLS (DESIGN.md §4 — Badges)
+   ========================================================================== */
+.badge-version {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    border-radius: 16px;
+    color: var(--accent-cyan);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 18px;
+    margin-bottom: 24px;
+}
+
+/* Success Badge */
+.badge-success {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 16px;
+    padding: 4px 12px;
+    color: var(--color-emerald-600);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+/* Warning Badge */
+.badge-warning {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(217, 119, 6, 0.15);
+    border: 1px solid rgba(217, 119, 6, 0.3);
+    border-radius: 16px;
+    padding: 4px 12px;
+    color: rgb(180, 83, 9);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+/* Error Badge */
+.badge-error {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(225, 29, 72, 0.15);
+    border: 1px solid rgba(225, 29, 72, 0.3);
+    border-radius: 16px;
+    padding: 4px 12px;
+    color: rgb(190, 24, 93);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+/* ==========================================================================
+   11. HERO SECTION
+   ========================================================================== */
+.hero {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.hero-title {
+    margin-bottom: 24px;
+}
+
+.hero-subtitle {
+    margin: 0 auto 40px auto;
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 800px;
+}
+
+/* Stats Row */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 48px;
+}
+
+/* Stat Card — DESIGN.md Elevated Card */
+.stat-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: var(--shadow-level1);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(6, 182, 212, 0.2);
+}
+
+[data-theme="dark"] .stat-card {
+    background-color: var(--bg-card);
+}
+
+.stat-val {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 4px;
+    line-height: 1.2;
+    /* Count-up animation target */
+    display: block;
+}
+
+.stat-label {
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   12. INSTALLATION HUB
+   ========================================================================== */
+.install-hub {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--bg-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.install-tab-bar {
+    display: flex;
+    background: var(--bg-obsidian);
+    border-bottom: 1px solid var(--glass-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+.install-tab-bar::-webkit-scrollbar { display: none; }
+
+.install-tab {
+    flex: 1;
+    min-width: max-content;
+    padding: 14px 18px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    font-size: var(--fs-btn-alt);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--transition-fast);
+    min-height: 44px; /* Touch target minimum */
+    white-space: nowrap;
+}
+
+.install-tab:hover {
+    color: var(--text-main);
+    background: var(--table-row-hover);
+}
+
+.install-tab.active {
+    color: var(--accent-cyan);
+    border-bottom-color: var(--accent-cyan);
+    background: var(--bg-surface);
+}
+
+.install-panel { padding: 24px; }
+
+.install-panel-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.install-panel-top-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.terminal-dots { display: flex; gap: 6px; }
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot-red    { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green  { background: #27c93f; }
+
+.terminal-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    color: var(--text-dim);
+}
+
+.terminal-copy-btn {
+    position: static !important;
+    transform: none !important;
+    flex-shrink: 0;
+}
+
+.terminal-body {
+    background: var(--code-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+}
+
+.terminal-prompt {
+    color: var(--accent-violet);
+    font-weight: 600;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+    flex-shrink: 0;
+    user-select: none;
+    line-height: 1.6;
+}
+
+.install-cmd,
+.terminal-body code {
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    word-break: break-word;
+    flex: 1;
+    min-width: 0;
+}
+
+.install-hint {
+    margin-top: 16px;
+    font-size: var(--fs-small);
+    color: var(--text-dim);
+    margin-bottom: 0;
+    max-width: none;
+}
+
+/* Platform Card (DESIGN.md §4) */
+.platform-card {
+    background: var(--platform-gradient);
+    border: none;
+    border-radius: 12px;
+    padding: 24px;
+    color: var(--color-white);
+    font-family: var(--font-sans);
+    font-size: var(--fs-list);
+    font-weight: 600;
+    line-height: 25.6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 16px 0px;
+}
+
+/* Copy Button */
+.btn-copy {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 400;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.btn-copy:hover {
+    color: var(--text-main);
+    background: var(--table-row-hover);
+    border-color: var(--text-main);
+}
+
+/* ── highlight.js base reset ────────────────────────────────────────────── */
+/* Prevent hljs from adding its own background/padding to the <code> element */
+code.hljs {
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    color: inherit !important;
+    display: block;
+    overflow-x: auto;
+}
+
+/* Strip backgrounds off EVERY span hljs injects */
+code.hljs span,
+.code-block-wrapper code.hljs span {
+    background:            transparent !important;
+    background-color:      transparent !important;
+    background-image:      none !important;
+    text-shadow:           none !important;
+    box-shadow:            none !important;
+    padding:               0 !important;
+    border:                none !important;
+    outline:               none !important;
+}
+
+/* ── Outer wrapper ──────────────────────────────────────────────────────── */
+.code-block-wrapper {
+    position: relative;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--cb-border);
+    box-shadow:
+        0 2px 4px rgba(0,0,0,0.06),
+        0 8px 24px rgba(0,0,0,0.08),
+        0 0 0 1px rgba(0,0,0,0.03) inset;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.code-block-wrapper:hover {
+    border-color: rgba(6, 182, 212, 0.25);
+    box-shadow:
+        0 2px 4px rgba(0,0,0,0.08),
+        0 12px 28px rgba(0,0,0,0.12);
+}
+
+[data-theme="dark"] .code-block-wrapper {
+    box-shadow:
+        0 4px 6px rgba(0,0,0,0.2),
+        0 12px 28px rgba(0,0,0,0.35),
+        0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+
+/* ── Header bar — adapts to theme ─────────────────────────────────────── */
+.code-block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: var(--cb-header-bg);
+    border-bottom: 1px solid var(--cb-header-sep);
+    user-select: none;
+    transition: background var(--transition-smooth);
+}
+
+.code-block-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ── macOS traffic lights ──────────────────────────────────────────────── */
+.code-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.code-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: filter var(--transition-fast);
+}
+
+.code-dot-red    { background: #ff5f57; box-shadow: 0 0 0 1px rgba(255,95,87,0.3); }
+.code-dot-yellow { background: #febc2e; box-shadow: 0 0 0 1px rgba(254,188,46,0.3); }
+.code-dot-green  { background: #28c840; box-shadow: 0 0 0 1px rgba(40,200,64,0.3); }
+
+.code-block-wrapper:hover .code-dot-red    { filter: brightness(1.1) saturate(1.2); }
+.code-block-wrapper:hover .code-dot-yellow { filter: brightness(1.1) saturate(1.2); }
+.code-block-wrapper:hover .code-dot-green  { filter: brightness(1.1) saturate(1.2); }
+
+/* ── Language badge ────────────────────────────────────────────────────── */
+.code-lang-badge {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cb-badge-color);
+    line-height: 1;
+    transition: color var(--transition-smooth);
+}
+
+/* ── Copy button in header ─────────────────────────────────────────────── */
+.code-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    background: var(--cb-copy-bg);
+    border: 1px solid var(--cb-copy-border);
+    border-radius: 6px;
+    color: var(--cb-copy-color);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    line-height: 1;
+    letter-spacing: 0.02em;
+}
+
+.code-copy-btn:hover {
+    background: rgba(6, 182, 212, 0.12);
+    border-color: rgba(6, 182, 212, 0.35);
+    color: var(--color-cyan-500);
+}
+
+.code-copy-btn.copied {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: var(--color-emerald-500);
+}
+
+/* ── Code body (pre) ───────────────────────────────────────────────────── */
+.code-block-wrapper pre {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    padding: 20px 24px;
+    background: var(--cb-bg);
+    box-shadow: none;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.75;
+    color: var(--cb-text);
+    overflow-x: auto;
+    tab-size: 4;
+    border-left: 3px solid var(--cb-gutter);
+    transition:
+        background-color var(--transition-smooth),
+        color            var(--transition-smooth),
+        border-color     var(--transition-smooth);
+}
+
+/* ── Scrollbar inside code body ────────────────────────────────────────── */
+.code-block-wrapper pre::-webkit-scrollbar { height: 5px; }
+.code-block-wrapper pre::-webkit-scrollbar-track { background: var(--cb-bg); }
+.code-block-wrapper pre::-webkit-scrollbar-thumb {
+    background: var(--cb-scrollbar);
+    border-radius: 3px;
+}
+.code-block-wrapper pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 182, 212, 0.45);
+}
+
+/* ── highlight.js syntax token colours — theme-aware ─────────────────── */
+/* Keywords: import, def, return, for, if, class, as, with, from, etc. */
+.code-block-wrapper .hljs-keyword,
+.code-block-wrapper .hljs-operator.word {
+    color: var(--cb-s-keyword);
+    font-weight: 500;
+}
+
+/* Strings, template literals, attribute values */
+.code-block-wrapper .hljs-string,
+.code-block-wrapper .hljs-template-variable,
+.code-block-wrapper .hljs-attr,
+.code-block-wrapper .hljs-attribute {
+    color: var(--cb-s-string);
+}
+
+/* Comments */
+.code-block-wrapper .hljs-comment,
+.code-block-wrapper .hljs-quote {
+    color: var(--cb-s-comment);
+    font-style: italic;
+}
+
+/* Built-in functions, types (print, len, str, int, etc.) */
+.code-block-wrapper .hljs-built_in,
+.code-block-wrapper .hljs-type {
+    color: var(--cb-s-class);
+}
+
+/* Numbers, booleans, None, True, False */
+.code-block-wrapper .hljs-number,
+.code-block-wrapper .hljs-literal {
+    color: var(--cb-s-number);
+}
+
+/* Function/class names */
+.code-block-wrapper .hljs-title,
+.code-block-wrapper .hljs-title.class_,
+.code-block-wrapper .hljs-title.function_,
+.code-block-wrapper .hljs-name {
+    color: var(--cb-s-function);
+    font-weight: 600;
+}
+
+/* Variables, parameters, self */
+.code-block-wrapper .hljs-variable,
+.code-block-wrapper .hljs-params {
+    color: var(--cb-text);
+}
+
+/* Operators (+, -, =, ==, etc.) */
+.code-block-wrapper .hljs-operator {
+    color: var(--cb-s-operator);
+}
+
+/* Punctuation, meta, symbol */
+.code-block-wrapper .hljs-punctuation,
+.code-block-wrapper .hljs-meta,
+.code-block-wrapper .hljs-symbol {
+    color: var(--cb-s-punctuation);
+}
+
+/* Diff: additions and deletions */
+.code-block-wrapper .hljs-addition { color: var(--cb-s-inserted); }
+.code-block-wrapper .hljs-deletion { color: var(--cb-s-deleted); }
+
+/* Section titles (e.g., bash section headers) */
+.code-block-wrapper .hljs-section { color: var(--cb-s-keyword); font-weight: 700; }
+
+/* Bold / italic decorators */
+.code-block-wrapper .hljs-strong { font-weight: 700; }
+.code-block-wrapper .hljs-emphasis { font-style: italic; }
+
+/* ── Fallback: standalone pre not inside wrapper ───────────────────────── */
+pre:not(.code-block-wrapper pre) {
+    background: var(--cb-bg);
+    border: 1px solid var(--cb-border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--cb-text);
+    margin-bottom: 24px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-left: 3px solid var(--cb-gutter);
+    transition: background var(--transition-smooth), color var(--transition-smooth);
+}
+
+
+
+/* ==========================================================================
+   14. TABLES
+   ========================================================================== */
+
+
+
+.table-wrapper {
+    overflow-x: auto;
+    margin: 24px 0;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-level1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-surface);
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+th {
+    background: var(--table-header);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--fs-small);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td {
+    font-family: var(--font-sans);
+    color: var(--text-muted);
+    font-size: var(--fs-list);
+}
+
+tr:last-child td { border-bottom: none; }
+
+tr:nth-child(even) td { background: var(--table-row-even); }
+
+tr:hover td {
+    background: var(--table-row-hover);
+    /* Premium: left accent bar on hover */
+}
+
+/* ==========================================================================
+   15. ALERTS (DESIGN.md aligned)
+   ========================================================================== */
+.alert {
+    padding: 20px 20px 20px 24px;
+    border-radius: 12px;
+    margin: 24px 0;
+    border-left: 4px solid var(--accent-cyan);
+    background-color: rgba(6, 182, 212, 0.05);
+}
+
+.alert-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--fs-list);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+}
+
+.alert-title i { color: var(--accent-cyan); }
+
+.alert p {
+    margin-bottom: 0;
+    font-size: var(--fs-list);
+    color: var(--text-muted);
+    max-width: none;
+}
+
+/* Alert variants */
+.alert-success {
+    border-left-color: var(--color-emerald-500);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+.alert-success .alert-title i { color: var(--color-emerald-500); }
+
+.alert-warning {
+    border-left-color: var(--color-amber-600);
+    background-color: rgba(217, 119, 6, 0.05);
+}
+.alert-warning .alert-title i { color: var(--color-amber-600); }
+
+.alert-error {
+    border-left-color: var(--color-error);
+    background-color: rgba(225, 29, 72, 0.05);
+}
+.alert-error .alert-title i { color: var(--color-error); }
+
+/* ==========================================================================
+   16. FEATURE CARDS (DESIGN.md — Standard + Elevated Cards)
+   ========================================================================== */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+/* Standard Card + Premium: animated gradient border on hover */
+.feature-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px; /* DESIGN.md: 12px for cards */
+    padding: 32px;
+    box-shadow: var(--shadow-level1);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0), rgba(16, 185, 129, 0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity var(--transition-smooth), background var(--transition-smooth);
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: transparent;
+}
+
+.feature-card:hover::before {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.8), rgba(16, 185, 129, 0.8));
+    opacity: 1;
+}
+
+[data-theme="dark"] .feature-card {
+    background-color: var(--bg-card);
+    border-color: var(--glass-border);
+}
+
+.feature-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--accent-cyan);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.feature-card:hover .feature-icon {
+    background: rgba(6, 182, 212, 0.15);
+    transform: scale(1.08);
+}
+
+.feature-title {
+    font-family: var(--font-sans);
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   17. TEXT INPUT STYLES (DESIGN.md §4 — Inputs & Forms)
+   ========================================================================== */
+.text-input {
+    background-color: var(--color-white);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--color-slate-900);
+    font-family: var(--font-system);
+    font-size: 13.3333px;
+    font-weight: 400;
+    line-height: normal;
+    height: 40px;
+    width: 100%;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    outline: none;
+}
+
+.text-input:focus {
+    border-color: var(--color-cyan-600);
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+.text-input.error {
+    border-color: var(--color-error);
+    background-color: rgba(225, 29, 72, 0.05);
+}
+
+.form-label {
+    display: block;
+    color: var(--color-slate-900);
+    font-family: var(--font-sans);
+    font-size: var(--fs-small);
+    font-weight: 400;
+    line-height: 21.76px;
+    margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   18. SYNTAX HIGHLIGHTING — Global Base Reset
+   All syntax COLOURS live in section 13 (.code-block-wrapper scope only).
+   This section ONLY handles the global base, and strips Prism backgrounds.
+   ========================================================================== */
+
+/* Base font/layout reset for Prism-targeted elements */
+code[class*="language-"],
+pre[class*="language-"] {
+    text-shadow: none !important;
+    font-family: var(--font-mono);
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    tab-size: 4;
+    hyphens: none;
+    font-size: 0.875rem;
+    line-height: 1.75;
+    /* No color set here — handled by .code-block-wrapper scope */
+}
+
+/* ── GLOBAL HIGHLIGHT.JS BACKGROUND NUKE ───────────────────────────────────
+   Ensures highlight.js span elements never render inline backgrounds or boxes.
+   ─────────────────────────────────────────────────────────────────────────── */
+code[class*="language-"] span,
+pre[class*="language-"] span,
+.hljs span {
+    background:            transparent !important;
+    background-color:      transparent !important;
+    background-image:      none !important;
+    text-shadow:           none !important;
+    box-shadow:            none !important;
+    border:                none !important;
+    outline:               none !important;
+    padding:               0 !important;
+    border-radius:         0 !important;
+    -webkit-text-fill-color: unset !important;
+}
+
+
+/* ==========================================================================
+   19. BREADCRUMB (DESIGN.md §4)
+   ========================================================================== */
+.breadcrumb {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: var(--fs-btn-alt);
+    font-weight: 400;
+    color: var(--text-main);
+    margin-bottom: 16px;
+}
+
+.breadcrumb-sep {
+    color: var(--color-slate-600);
+    margin: 0 4px;
+}
+
+/* ==========================================================================
+   19.2. API FUNCTION CODE MODAL POPUP
+   ========================================================================== */
+.func-trigger-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all var(--transition-fast);
+}
+
+.func-trigger-btn:hover code {
+    color: var(--accent-cyan) !important;
+    border-color: var(--accent-cyan) !important;
+    box-shadow: 0 0 10px var(--accent-cyan-glow);
+}
+
+.func-trigger-btn i {
+    font-size: 0.7rem;
+    color: var(--accent-cyan);
+    opacity: 0.6;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.func-trigger-btn:hover i {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.api-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.api-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.api-modal-container {
+    background: var(--bg-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 650px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    transform: scale(0.94);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.api-modal-overlay.active .api-modal-container {
+    transform: scale(1);
+}
+
+.api-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--glass-border);
+    background: var(--bg-obsidian);
+}
+
+.api-modal-badge {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.alert.alert-info {
+    border-left-color: var(--accent-cyan);
+    background: rgba(6, 182, 212, 0.06);
+}
+
+.alert.alert-info .alert-title {
+    color: var(--accent-cyan);
+}
+
+.api-modal-title {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 2px 0 0 0;
+}
+
+.api-modal-close {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.api-modal-close:hover {
+    color: var(--text-main);
+    border-color: var(--accent-cyan);
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.api-modal-body {
+    padding: 20px;
+}
+
+.api-modal-desc {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+    .api-modal-overlay {
+        padding: 12px;
+    }
+    .api-modal-container {
+        max-width: 100%;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+    }
+    .api-modal-header {
+        padding: 12px 14px;
+        flex-shrink: 0;
+    }
+    .api-modal-title {
+        font-size: 0.95rem;
+    }
+    .api-modal-body {
+        padding: 14px;
+        overflow-y: auto;
+    }
+    .api-modal-desc {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+    .code-block-header {
+        padding: 6px 10px;
+    }
+    .api-modal-body pre {
+        margin: 0;
+        max-height: 50vh;
+        overflow-x: auto;
+    }
+    .api-modal-body pre code {
+        font-size: 0.78rem !important;
+        padding: 10px !important;
+        white-space: pre !important;
+        overflow-x: auto !important;
+    }
+}
+
+/* ==========================================================================
+   19.5. PAGE FOOTER NAVIGATION — Single-Line Sleek Pill Buttons
+   ========================================================================== */
+.page-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--glass-border);
+    width: 100%;
+}
+
+.page-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+    box-shadow: var(--shadow-level1);
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+.page-nav-btn.prev {
+    margin-right: auto;
+}
+
+.page-nav-btn.next {
+    margin-left: auto;
+}
+
+.page-nav-btn:hover {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(6, 182, 212, 0.15);
+}
+
+.page-nav-btn i {
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+    transition: transform var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.page-nav-btn.prev:hover i {
+    transform: translateX(-3px);
+}
+
+.page-nav-btn.next:hover i {
+    transform: translateX(3px);
+}
+
+@media (max-width: 480px) {
+    .page-nav {
+        gap: 8px;
+        margin-top: 24px;
+        padding-top: 14px;
+    }
+    .page-nav-btn {
+        padding: 6px 10px;
+        font-size: 0.76rem;
+        border-radius: 6px;
+        max-width: 48%;
+        overflow: hidden;
+    }
+    .page-nav-btn span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .page-nav-btn i {
+        font-size: 0.7rem;
+    }
+}
+
+/* ==========================================================================
+   20. RESPONSIVE BREAKPOINTS (DESIGN.md §8)
+   ========================================================================== */
+
+/* ==========================================================================
+   20. RESPONSIVE BREAKPOINTS (DESIGN.md §8 — Comprehensive Mobile & Desktop)
+   ========================================================================== */
+
+/* --- Medium Screen / Tablet Landscape (≤ 1024px) --- */
+@media (max-width: 1024px) {
+    :root {
+        --fs-display: 3.25rem;
+        --fs-h2:      1.85rem;
+        --fs-body:    1.2rem;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 32px 5% 70px 5%;
+    }
+
+    .nav-controls a.nav-link-btn { display: none; }
+    .mobile-toggle { display: block; }
+
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+    }
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* --- Tablet Portrait (≤ 768px) --- */
+@media (max-width: 768px) {
+    :root {
+        --fs-display: 2.5rem;
+        --fs-h2:      1.6rem;
+        --fs-body:    1.1rem;
+        --fs-list:    0.95rem;
+    }
+
+    .hero { padding: 32px 0 40px; }
+    .hero-subtitle { font-size: 1.1rem; max-width: 100%; }
+
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .install-hub { border-radius: 12px; }
+    .install-panel { padding: 20px 16px; }
+    .terminal-body { padding: 16px; }
+
+    .table-wrapper { margin: 16px 0; }
+    th, td { padding: 12px; font-size: 0.9rem; }
+}
+
+/* --- Mobile / Smartphone (≤ 480px) --- */
+@media (max-width: 480px) {
+    :root {
+        --fs-display: 1.85rem;    /* 30px display font */
+        --fs-h2:      1.3rem;     /* ~21px section headings */
+        --fs-body:    0.98rem;    /* 15.6px readable body */
+        --fs-list:    0.88rem;
+    }
+
+    .navbar {
+        padding: 0 10px;
+    }
+
+    .nav-brand span {
+        font-size: 0.85rem;
+        max-width: 165px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+    }
+
+    .brand-logo-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 16px 12px 48px 12px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .hero { padding: 16px 0 24px; }
+
+    .hero-title {
+        word-break: break-word;
+        hyphens: auto;
+        font-size: 1.85rem;
+        line-height: 1.25;
+    }
+
+    .hero-title br { display: none; }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .stat-card { padding: 12px 10px; }
+    .stat-val { font-size: 1.35rem; }
+    .stat-label { font-size: 0.7rem; }
+
+    h2 { margin-top: 1.5rem; }
+
+    /* CTA buttons stack full-width on phone viewports */
+    .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    .hero-cta-group .nav-link-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .install-hub { border-radius: 10px; width: 100%; }
+    .install-tab { padding: 8px 10px; font-size: 0.72rem; min-height: 40px; }
+    .install-panel { padding: 12px 10px; }
+    .terminal-body { padding: 10px 12px; font-size: 0.82rem; }
+    .terminal-label { font-size: 0.72rem; }
+
+    /* Code block mobile spacing optimization */
+    .code-block-wrapper {
+        border-radius: 8px;
+        margin-bottom: 16px;
+    }
+    .code-block-wrapper pre {
+        padding: 12px 14px;
+        font-size: 0.78rem;
+        line-height: 1.6;
+    }
+    .code-block-header {
+        padding: 6px 10px;
+    }
+    .code-dots { gap: 4px; }
+    .code-dot { width: 10px; height: 10px; }
+    .code-lang-badge { font-size: 0.62rem; }
+    .code-copy-btn { padding: 4px 8px; font-size: 0.65rem; }
+
+    .feature-card { padding: 18px; }
+    .feature-card::before { display: none; } /* Skip animated border on phone for performance */
+
+    .nav-controls .btn-icon { width: 34px; height: 34px; }
+
+    /* Table mobile scroll optimization */
+    .table-wrapper {
+        border-radius: 8px;
+        margin: 16px 0;
+        -webkit-overflow-scrolling: touch;
+    }
+    table {
+        min-width: 480px; /* Ensures tables scroll cleanly instead of collapsing cell width */
+    }
+    th, td { padding: 8px 10px; font-size: 0.8rem; }
+}
+
+/* --- Large Desktop (≥ 1025px) --- */
+@media (min-width: 1025px) {
+    .nav-controls a.nav-link-btn { display: inline-flex; }
+    .mobile-toggle { display: none; }
+    .sidebar { transform: translateX(0); }
+}
+
+/* --- Ultrawide / Large Desktop (≥ 1401px) --- */
+@media (min-width: 1401px) {
+    .main-content {
+        padding: 40px 8% 80px 8%;
+        max-width: var(--content-max);
+    }
+}
+
+/* ==========================================================================
+   21. FINAL CASCADE-LAST — Code block token background kill switch
+   Placed at the very bottom of the file so it wins the cascade against
+   any Prism CDN stylesheet or late-loaded <style> injection.
+   ========================================================================== */
+
+/* This selector targets every possible syntax token span in every context */
+.hljs span,
+span[class*="hljs-"] {
+    background:       transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow:       none !important;
+    text-shadow:      none !important;
+    padding:          0 !important;
+    border-radius:    0 !important;
+    border:           none !important;
+    outline:          none !important;
+}
+
+/* Smooth theme transition on code block elements */
+.code-block-wrapper,
+.code-block-wrapper pre,
+.code-block-wrapper .code-block-header,
+.code-block-wrapper .code-lang-badge,
+.code-block-wrapper .code-copy-btn {
+    transition:
+        background-color var(--transition-smooth),
+        color            var(--transition-smooth),
+        border-color     var(--transition-smooth) !important;
+}

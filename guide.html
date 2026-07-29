@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage Guide — NLP Text Preprocessing</title>
+    <meta name="description" content="Learn how to use nlp-text-preprocessing: build custom pipelines, integrate with Pandas DataFrames, and process text in batch using the Pipeline automation engine.">
+    <meta name="keywords" content="NLP pipeline, text processing guide, pandas NLP, Python text cleaning tutorial, pipeline automation">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="nlp_logo.png">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <button class="mobile-toggle" id="mobile-menu-btn" type="button" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
+            <a href="index.html" class="nav-brand">
+                <img src="nlp_logo.png" alt="nlp-text-preprocessing logo" class="brand-logo-img">
+                <span>nlp-text-preprocessing</span>
+            </a>
+        </div>
+
+        <div class="nav-controls">
+            <a href="https://pepy.tech/projects/nlp-text-preprocessing" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-analytics" aria-label="PePy Analytics">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                <span>PePy Analytics</span>
+            </a>
+            <a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-pypi" aria-label="PyPI Package">
+                <i class="fas fa-box" aria-hidden="true"></i>
+                <span>PyPI Package</span>
+            </a>
+            <a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-github" aria-label="GitHub Repository">
+                <i class="fab fa-github" aria-hidden="true"></i>
+                <span>GitHub Repo</span>
+            </a>
+            <button class="btn-icon" id="theme-toggle-btn" type="button" aria-label="Toggle Dark/Light Mode">
+                <span id="theme-icon" aria-hidden="true">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Documentation</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="index.html" class="sidebar-link"><i class="fas fa-home" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Introduction &amp; Setup</span></a></li>
+                    <li><a href="guide.html" class="sidebar-link active"><i class="fas fa-book-open" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Usage Guide</span></a></li>
+                    <li><a href="api.html" class="sidebar-link"><i class="fas fa-code" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>API Reference</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Topics</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="#pipeline" class="sidebar-link sub"><span>Pipeline Engine</span></a></li>
+                    <li><a href="#pandas" class="sidebar-link sub"><span>Pandas Integration</span></a></li>
+                    <li><a href="#batch" class="sidebar-link sub"><span>Batch Processing</span></a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Project Links</div>
+                <ul class="sidebar-nav" role="list">
+                    <li><a href="https://pepy.tech/projects/nlp-text-preprocessing" target="_blank" class="sidebar-link"><i class="fas fa-chart-bar" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PePy Analytics</span></a></li>
+                    <li><a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" class="sidebar-link"><i class="fas fa-box" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PyPI Package</span></a></li>
+                    <li><a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank" class="sidebar-link"><i class="fab fa-github" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>GitHub Repository</span></a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content">
+
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="index.html" style="border-bottom: none; font-size: inherit; font-weight: 400; color: var(--text-muted);">Home</a>
+                <span class="breadcrumb-sep" aria-hidden="true">/</span>
+                <span style="color: var(--text-main); font-weight: 600;">Usage Guide</span>
+            </nav>
+
+            <h1 style="margin-top: 0;">Usage Guide</h1>
+            <p>Learn how to use the advanced features of the <code>nlp_text_preprocessing</code> package — from building custom pipelines to seamlessly integrating with Pandas DataFrames.</p>
+
+            <div class="alert alert-success" role="note">
+                <div class="alert-title"><i class="fas fa-check-circle" aria-hidden="true"></i> Quick Install</div>
+                <p>Haven't installed yet? Run <code>pip install nlp-text-preprocessing</code> then import with <code>import nlp_text_preprocessing as tp</code>.</p>
+            </div>
+
+            <!-- 1. Pipeline Engine -->
+            <section id="pipeline" aria-labelledby="pipeline-heading">
+                <h2 id="pipeline-heading">
+                    <i class="fas fa-cogs" aria-hidden="true" style="color: var(--accent-cyan); margin-right: 10px;"></i>
+                    1. Pipeline Automation Engine
+                </h2>
+                <p>The <code>Pipeline</code> class allows you to chain cleaning and transformation steps cleanly without messy nested function calls. Define your steps once and reuse them across your project.</p>
+
+                <pre><code class="language-python">import nlp_text_preprocessing as tp
+
+# Build a custom step pipeline
+pipe = tp.Pipeline([
+    'to_lower_case',
+    'expand_hashtags',
+    'remove_urls',
+    'remove_emails',
+    'remove_extra_whitespace',
+    'convert_to_base'
+])
+
+# Process a single text string
+raw_text = "Check out #MachineLearning at https://example.com!"
+clean_result = pipe.run(raw_text)
+
+print(clean_result)
+# Output: "check out machine learning at"</code></pre>
+
+                <div class="alert" role="note">
+                    <div class="alert-title"><i class="fas fa-magic" aria-hidden="true"></i> Default Pipeline</div>
+                    <p>Just want standard cleaning without configuring individual steps? Use <code>pipe = tp.Pipeline.default()</code> — it includes the most common sanitization routines automatically.</p>
+                </div>
+            </section>
+
+            <!-- 2. Pandas Integration -->
+            <section id="pandas" aria-labelledby="pandas-heading">
+                <h2 id="pandas-heading">
+                    <i class="fas fa-table" aria-hidden="true" style="color: var(--accent-emerald); margin-right: 10px;"></i>
+                    2. Pandas DataFrame Integration
+                </h2>
+                <p>Because all functions have built-in NaN/None defensive guards, you can use them directly on DataFrame columns with <code>.apply()</code> — no lambda wrappers needed.</p>
+
+                <pre><code class="language-python">import pandas as pd
+import nlp_text_preprocessing as tp
+
+# Sample messy data with None and NaN rows
+df = pd.DataFrame({
+    'comments': [
+        "Great product! http://buy.me",
+        None,
+        "Terrible service 😡",
+        float('nan')
+    ]
+})
+
+# Apply a single function safely — no try/except needed
+df['clean_comments'] = df['comments'].apply(tp.remove_urls)
+
+# Or apply an entire pipeline over a series
+pipe = tp.Pipeline(['to_lower_case', 'emoji_to_text'])
+df['processed'] = pipe.run_series(df['comments'])
+
+print(df[['comments', 'processed']])</code></pre>
+
+                <div class="alert alert-success" role="note">
+                    <div class="alert-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> Null Safety in Action</div>
+                    <p>The <code>None</code> and <code>float('nan')</code> rows in the example above are handled automatically — they return empty strings (<code>""</code>) instead of raising <code>AttributeError</code> or <code>TypeError</code>.</p>
+                </div>
+            </section>
+
+            <!-- 3. Batch Processing -->
+            <section id="batch" aria-labelledby="batch-heading">
+                <h2 id="batch-heading">
+                    <i class="fas fa-layer-group" aria-hidden="true" style="color: var(--accent-violet); margin-right: 10px;"></i>
+                    3. Batch Feature Extraction
+                </h2>
+                <p>Use <code>text_stats_batch()</code> to compute multiple features at once across an entire DataFrame column, returning a new DataFrame of features ready for ML pipelines.</p>
+
+                <pre><code class="language-python">import pandas as pd
+import nlp_text_preprocessing as tp
+
+df = pd.DataFrame({
+    'reviews': [
+        "The product quality is excellent and delivery was fast!",
+        "Terrible experience, will never buy again.",
+        "Average product, nothing special."
+    ]
+})
+
+# One call — returns word_count, char_count, avg_word_len, sentence_count, etc.
+features = tp.text_stats_batch(df, col='reviews')
+
+print(features.head())
+#    word_count  char_count  avg_word_len  sentence_count  stop_words_count
+# 0           9          49          4.78               1                 4
+# 1           7          41          4.86               1                 2
+# 2           5          31          5.20               1                 1</code></pre>
+
+                <div class="alert alert-warning" role="note">
+                    <div class="alert-title"><i class="fas fa-info-circle" aria-hidden="true"></i> Performance Tip</div>
+                    <p>For very large DataFrames (&gt; 1M rows), consider chunking your data or using <code>pipe.run_series()</code> with <code>pandas.Series.swifter.apply()</code> for parallel execution.</p>
+                </div>
+            </section>
+
+            <!-- Page Navigation -->
+            <nav class="page-nav" aria-label="Page navigation">
+                <a href="index.html" class="page-nav-btn prev">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    <span>Intro &amp; Setup</span>
+                </a>
+                <a href="api.html" class="page-nav-btn next">
+                    <span>API Reference</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </nav>
+
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
+    <script src="app.js" defer></script>
+</body>
+</html>
