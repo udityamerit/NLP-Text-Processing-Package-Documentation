@@ -482,6 +482,19 @@ body {
     color: var(--text-main);
     border-color: var(--glass-border);
 }
+
+/* Violet Accent — Author Portfolio Button */
+.btn-author {
+    background-color: rgba(124, 58, 237, 0.1);
+    border-color: rgba(124, 58, 237, 0.2);
+    color: var(--accent-violet);
+}
+.btn-author:hover {
+    background-color: rgba(124, 58, 237, 0.18);
+    border-color: rgba(124, 58, 237, 0.35);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+}
+
 [data-theme="dark"] .btn-github:hover {
     background-color: rgba(255, 255, 255, 0.05);
     border-color: rgba(255, 255, 255, 0.15);
