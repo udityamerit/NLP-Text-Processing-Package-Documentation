@@ -1,0 +1,6 @@
+
+scratch_all_text_preprocess.py
+
+__pycache__/
+.venv/
+venv/

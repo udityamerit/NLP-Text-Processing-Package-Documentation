@@ -12,14 +12,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Reference — NLP Text Preprocessing</title>
-    <meta name="description" content="Complete API reference for all 60+ functions in the nlp-text-preprocessing Python library. Grouped by capability: feature extraction, text cleaning, and linguistic tools.">
-    <meta name="keywords" content="NLP API, text preprocessing functions, Python NLP, word count, lemmatize, remove URLs, NER, POS tagging">
+    <meta name="description" content="Complete API reference for all 75+ functions and pipeline utilities in the nlp-text-preprocessing Python library. Grouped by capability with interactive code examples.">
+    <meta name="keywords" content="NLP API, text preprocessing functions, Python NLP, word count, lemmatize, remove URLs, NER, POS tagging, sentiment analysis, profanity detection, pipeline engine">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="nlp_logo.png">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="index.css">
+    <!-- FontAwesome Font CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Scroll Progress Bar -->
@@ -71,7 +73,10 @@
                 <ul class="sidebar-nav" role="list">
                     <li><a href="#feature-extraction" class="sidebar-link sub"><span>Feature Extraction</span></a></li>
                     <li><a href="#cleaning" class="sidebar-link sub"><span>Text Cleaning</span></a></li>
-                    <li><a href="#linguistic" class="sidebar-link sub"><span>Linguistic Tools</span></a></li>
+                    <li><a href="#linguistic" class="sidebar-link sub"><span>Linguistic &amp; Grammar</span></a></li>
+                    <li><a href="#safety-sentiment" class="sidebar-link sub"><span>Safety &amp; Sentiment</span></a></li>
+                    <li><a href="#pipeline-engine" class="sidebar-link sub"><span>Pipeline Engine</span></a></li>
+                    <li><a href="#environment" class="sidebar-link sub"><span>Environment &amp; Setup</span></a></li>
                 </ul>
             </div>
 
@@ -99,7 +104,7 @@
             </nav>
 
             <h1 style="margin-top: 0;">API Reference</h1>
-            <p>Complete reference for all functions in the <code>nlp_text_preprocessing</code> library. Functions are grouped logically by capability — each is fully null-safe and ready for use with Pandas <code>.apply()</code>.</p>
+            <p>Complete reference for all <strong>75+ functions and pipeline utilities</strong> in the <code>nlp_text_preprocessing</code> library. Functions are logically organized into 6 core capability areas — each is fully null-safe and ready for production Pandas <code>.apply()</code> pipelines.</p>
 
             <div class="alert" role="note" aria-label="Null safety guarantee" style="margin-bottom: 12px;">
                 <div class="alert-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> Null Safety Guarantee</div>
@@ -111,15 +116,15 @@
                 <p>Click on any function name in the reference tables below to open an interactive code popup with a copyable Python usage example and live output demonstration.</p>
             </div>
 
-            <!-- Category 1: Feature Extraction -->
-            <section id="feature-extraction" aria-labelledby="feat-heading">
-                <h2 id="feat-heading">
+            <!-- Category: 1. General Feature Extraction & Statistics -->
+            <section id="feature-extraction" aria-labelledby="feature-extraction-heading">
+                <h2 id="feature-extraction-heading">
                     <i class="fas fa-chart-bar" aria-hidden="true" style="color: var(--accent-cyan); margin-right: 10px;"></i>
-                    1. General Feature Extraction
+                    1. General Feature Extraction & Statistics
                 </h2>
-                <p>Extract statistical features, readability scores, and basic counts from your raw text.</p>
+                <p>Extract statistical metrics, word counts, sentence lengths, readability metrics, and text density features.</p>
 
-                <div class="table-wrapper" role="region" aria-label="Feature extraction functions">
+                <div class="table-wrapper" role="region" aria-label="1. General Feature Extraction & Statistics">
                     <table>
                         <thead>
                             <tr>
@@ -134,58 +139,112 @@
                                 <td><button class="func-trigger-btn" data-func="word_count" type="button" title="Click to view code example"><code>word_count(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
-                                <td>Returns total whitespace-separated word count.</td>
+                                <td>Calculates total whitespace-separated word count in input text string.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="char_count" type="button" title="Click to view code example"><code>char_count(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
-                                <td>Returns total characters excluding spaces.</td>
+                                <td>Counts total characters in input text, excluding whitespace characters.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="avg_word_len" type="button" title="Click to view code example"><code>avg_word_len(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
-                                <td>Returns average word length (0.0 for empty inputs).</td>
+                                <td>Computes average word length in characters. Returns 0.0 for empty text.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="stop_words_count" type="button" title="Click to view code example"><code>stop_words_count(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
-                                <td>Returns count of stop words (case-insensitive).</td>
+                                <td>Counts total English stop words in input text (case-insensitive).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="hashtags_count" type="button" title="Click to view code example"><code>hashtags_count(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns count of social media hashtags (#tag) in text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="mentions_count" type="button" title="Click to view code example"><code>mentions_count(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns count of social media user mentions (@user) in text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="numerics_count" type="button" title="Click to view code example"><code>numerics_count(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns total count of standalone numeric tokens in text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="upper_case_count" type="button" title="Click to view code example"><code>upper_case_count(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns count of words written entirely in uppercase.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="sentence_count" type="button" title="Click to view code example"><code>sentence_count(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
-                                <td>Returns total number of sentences.</td>
+                                <td>Counts total sentences using sentence terminal punctuation (. ! ?).</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="avg_sentence_len" type="button" title="Click to view code example"><code>avg_sentence_len(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
-                                <td>Returns average sentence length in words.</td>
+                                <td>Calculates average sentence length in words per sentence.</td>
                             </tr>
                             <tr>
-                                <td><button class="func-trigger-btn" data-func="text_stats_batch" type="button" title="Click to view code example"><code>text_stats_batch(df, col)</code></button></td>
-                                <td><code>df, col</code></td>
+                                <td><button class="func-trigger-btn" data-func="punctuation_density" type="button" title="Click to view code example"><code>punctuation_density(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
+                                <td>Returns proportion of punctuation characters relative to total text length.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="capital_ratio" type="button" title="Click to view code example"><code>capital_ratio(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
+                                <td>Returns proportion of uppercase words relative to total word count.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="unique_word_ratio" type="button" title="Click to view code example"><code>unique_word_ratio(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
+                                <td>Calculates vocabulary richness as the ratio of unique words to total words.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="readability_score" type="button" title="Click to view code example"><code>readability_score(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
+                                <td>Calculates Flesch Reading Ease score to measure text readability.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="text_stats" type="button" title="Click to view code example"><code>text_stats(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">dict</span></td>
+                                <td>Returns a comprehensive dictionary containing all summary feature statistics.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="text_stats_batch" type="button" title="Click to view code example"><code>text_stats_batch(df, column)</code></button></td>
+                                <td><code>df: DataFrame, column: str</code></td>
                                 <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">DataFrame</span></td>
-                                <td>Returns a DataFrame of stats for a pandas DataFrame column.</td>
+                                <td>Computes word_count, char_count, avg_word_len, sentence_count, and stop_words_count in a single pass over a DataFrame column.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- Category 2: Text Cleaning -->
-            <section id="cleaning" aria-labelledby="clean-heading">
-                <h2 id="clean-heading">
+            <!-- Category: 2. Text Cleaning & Normalization -->
+            <section id="cleaning" aria-labelledby="cleaning-heading">
+                <h2 id="cleaning-heading">
                     <i class="fas fa-broom" aria-hidden="true" style="color: var(--accent-emerald); margin-right: 10px;"></i>
-                    2. Text Cleaning and Normalization
+                    2. Text Cleaning & Normalization
                 </h2>
-                <p>Powerful utilities for sanitizing web scraping artifacts, social media tokens, and special characters.</p>
+                <p>Sanitize noise, remove URLs/emails/HTML, normalize emojis, mask PII, and standardize punctuation.</p>
 
-                <div class="table-wrapper" role="region" aria-label="Text cleaning functions">
+                <div class="table-wrapper" role="region" aria-label="2. Text Cleaning & Normalization">
                     <table>
                         <thead>
                             <tr>
@@ -200,63 +259,178 @@
                                 <td><button class="func-trigger-btn" data-func="to_lower_case" type="button" title="Click to view code example"><code>to_lower_case(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
-                                <td>Converts input text to lowercase.</td>
+                                <td>Converts input text to lowercase safely without crashing on null values.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="contraction_to_expansion" type="button" title="Click to view code example"><code>contraction_to_expansion(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
-                                <td>Expands contractions using a contractions dictionary.</td>
+                                <td>Expands English contractions (e.g. "don't" -> "do not", "I'm" -> "I am").</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="remove_emails" type="button" title="Click to view code example"><code>remove_emails(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
-                                <td>Removes all email addresses from text.</td>
+                                <td>Strips email addresses matching standard RFC 5322 patterns.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="count_emails" type="button" title="Click to view code example"><code>count_emails(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns total count of email addresses present in input text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="count_urls" type="button" title="Click to view code example"><code>count_urls(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns total count of HTTP/HTTPS/FTP web URLs present in input text.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="remove_urls" type="button" title="Click to view code example"><code>remove_urls(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
-                                <td>Removes HTTP/HTTPS links and www URLs.</td>
+                                <td>Removes HTTP, HTTPS, FTP links and www web domain URLs.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="count_rt" type="button" title="Click to view code example"><code>count_rt(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Returns count of retweet markers (RT @user) in social media text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_rt" type="button" title="Click to view code example"><code>remove_rt(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Strips retweet markers (RT @user) from social media text.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="remove_html_tag" type="button" title="Click to view code example"><code>remove_html_tag(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
-                                <td>Strips HTML/XML tags using BeautifulSoup.</td>
+                                <td>Strips HTML, XML tags, and inline markup using BeautifulSoup parser.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="remove_accented_chars" type="button" title="Click to view code example"><code>remove_accented_chars(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
-                                <td>Normalizes accented characters (NFKD &rarr; ASCII).</td>
+                                <td>Normalizes unicode accented characters (NFKD decomposition -> ASCII).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_mentions" type="button" title="Click to view code example"><code>remove_mentions(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Removes user mentions (@user) from social media text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_special_chars" type="button" title="Click to view code example"><code>remove_special_chars(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Removes special characters and punctuation symbols from input text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_repeated_chars" type="button" title="Click to view code example"><code>remove_repeated_chars(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Truncates character repetitions beyond 2 consecutive occurrences (e.g. "coooool" -> "cool").</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_stop_words" type="button" title="Click to view code example"><code>remove_stop_words(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Removes English stop words from input text (case-insensitive).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_emojis" type="button" title="Click to view code example"><code>remove_emojis(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Strips all emoji symbols and unicode pictographs from input text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="extract_emojis" type="button" title="Click to view code example"><code>extract_emojis(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list</span></td>
+                                <td>Extracts a list of emoji characters present in input text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="emoji_to_text" type="button" title="Click to view code example"><code>emoji_to_text(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Converts emojis in input text to descriptive word representations (e.g. "🔥" -> "fire").</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_phone_numbers" type="button" title="Click to view code example"><code>remove_phone_numbers(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Strips phone numbers in standard international or domestic formats.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="count_phone_numbers" type="button" title="Click to view code example"><code>count_phone_numbers(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">int</span></td>
+                                <td>Counts phone numbers present in input text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="mask_pii" type="button" title="Click to view code example"><code>mask_pii(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Redacts emails, phone numbers, and card/ID numbers with [REDACTED].</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_extra_whitespace" type="button" title="Click to view code example"><code>remove_extra_whitespace(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Collapses consecutive spaces, tabs, and newlines into a single space.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="expand_hashtags" type="button" title="Click to view code example"><code>expand_hashtags(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Splits camelCase or PascalCase hashtags into separate words (#MachineLearning -> Machine Learning).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="normalize_unicode_punctuation" type="button" title="Click to view code example"><code>normalize_unicode_punctuation(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Replaces smart quotes (“ ” ‘ ’), em-dashes (—), and ellipsis (…) with ASCII equivalents.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_numbers" type="button" title="Click to view code example"><code>remove_numbers(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Strips all numeric digits from input text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="remove_currency_symbols" type="button" title="Click to view code example"><code>remove_currency_symbols(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Strips common currency symbols ($, €, ₹, £, ¥) from text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="normalize_whitespace_and_casing" type="button" title="Click to view code example"><code>normalize_whitespace_and_casing(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Canonical combination of lowercasing and extra whitespace collapse.</td>
                             </tr>
                             <tr>
                                 <td><button class="func-trigger-btn" data-func="clean_text" type="button" title="Click to view code example"><code>clean_text(text)</code></button></td>
                                 <td><code>text: str</code></td>
                                 <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
-                                <td>Runs the default end-to-end cleaning pipeline.</td>
+                                <td>Runs the default end-to-end cleaning pipeline: lowercase, expand contractions, remove URLs/emails/HTML, remove special characters & extra spaces.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- Category 3: Linguistic Processing -->
-            <section id="linguistic" aria-labelledby="ling-heading">
-                <h2 id="ling-heading">
+            <!-- Category: 3. Linguistic Processing, Semantics & Grammar -->
+            <section id="linguistic" aria-labelledby="linguistic-heading">
+                <h2 id="linguistic-heading">
                     <i class="fas fa-language" aria-hidden="true" style="color: var(--accent-violet); margin-right: 10px;"></i>
-                    3. Linguistic Processing
+                    3. Linguistic Processing, Semantics & Grammar
                 </h2>
-                <p>NLP-centric transformations powered by spaCy and NLTK for core linguistic analysis.</p>
+                <p>spaCy and NLTK/TextBlob powered lemmatization, NER, dependency parsing, POS tagging, and lexical lookup.</p>
 
-                <div class="alert alert-warning" role="note">
-                    <div class="alert-title"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> spaCy Model Required</div>
-                    <p>These functions require the <code>en_core_web_sm</code> model. Run <code>python -m spacy download en_core_web_sm</code> before first use.</p>
-                </div>
-
-                <div class="table-wrapper" role="region" aria-label="Linguistic processing functions">
+                <div class="table-wrapper" role="region" aria-label="3. Linguistic Processing, Semantics & Grammar">
                     <table>
                         <thead>
                             <tr>
@@ -271,19 +445,277 @@
                                 <td><button class="func-trigger-btn" data-func="convert_to_base" type="button" title="Click to view code example"><code>convert_to_base(x)</code></button></td>
                                 <td><code>x: str</code></td>
                                 <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
-                                <td>Lemmatizes nouns and verbs via spaCy while keeping other POS tags.</td>
+                                <td>Lemmatizes verbs and nouns into base forms using spaCy while preserving word order.</td>
                             </tr>
                             <tr>
-                                <td><button class="func-trigger-btn" data-func="extract_ner" type="button" title="Click to view code example"><code>extract_ner(x)</code></button></td>
+                                <td><button class="func-trigger-btn" data-func="lemmatize" type="button" title="Click to view code example"><code>lemmatize(x)</code></button></td>
                                 <td><code>x: str</code></td>
-                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list</span></td>
-                                <td>Extracts Named Entities (Persons, Orgs, Locations) as a list of tuples.</td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Lemmatizes all tokens in input text to dictionary lemmas using spaCy.</td>
                             </tr>
                             <tr>
-                                <td><button class="func-trigger-btn" data-func="extract_pos" type="button" title="Click to view code example"><code>extract_pos(x)</code></button></td>
+                                <td><button class="func-trigger-btn" data-func="extract_entities" type="button" title="Click to view code example"><code>extract_entities(x)</code></button></td>
                                 <td><code>x: str</code></td>
-                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list</span></td>
-                                <td>Returns a list of tuples with Part-Of-Speech tagging for each token.</td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[tuple]</span></td>
+                                <td>Extracts Named Entities (PERSON, ORG, GPE, DATE, etc.) as (entity, label) tuples.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="extract_pos_tags" type="button" title="Click to view code example"><code>extract_pos_tags(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[tuple]</span></td>
+                                <td>Returns Part-Of-Speech (POS) tags for each token in the text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="get_dependency_tree" type="button" title="Click to view code example"><code>get_dependency_tree(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[dict]</span></td>
+                                <td>Extracts grammatical dependency parse tree tokens, dependency relations, and head tokens.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="detect_language" type="button" title="Click to view code example"><code>detect_language(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Detects ISO language code (e.g. "en", "es", "fr") of text using TextBlob.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="keyword_extraction" type="button" title="Click to view code example"><code>keyword_extraction(x, top_n=5)</code></button></td>
+                                <td><code>x: str, top_n: int</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[tuple]</span></td>
+                                <td>Extracts top_n keyword tokens based on term frequency.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="text_similarity" type="button" title="Click to view code example"><code>text_similarity(x1, x2)</code></button></td>
+                                <td><code>x1: str, x2: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
+                                <td>Calculates Jaccard token similarity index between two texts (0.0 to 1.0).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="get_synonyms" type="button" title="Click to view code example"><code>get_synonyms(word)</code></button></td>
+                                <td><code>word: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[str]</span></td>
+                                <td>Retrieves synonym list for target word via NLTK WordNet synsets.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="get_antonyms" type="button" title="Click to view code example"><code>get_antonyms(word)</code></button></td>
+                                <td><code>word: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[str]</span></td>
+                                <td>Retrieves antonym list for target word via NLTK WordNet synsets.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="chunk_noun_phrases" type="button" title="Click to view code example"><code>chunk_noun_phrases(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[dict]</span></td>
+                                <td>Extracts noun phrase chunks with start/end character offsets using spaCy.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="get_wordcloud" type="button" title="Click to view code example"><code>get_wordcloud(x, save_path=None, show=True)</code></button></td>
+                                <td><code>x: str, save_path: str, show: bool</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">WordCloud</span></td>
+                                <td>Generates, displays, or saves a WordCloud visualization object for input text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="correct_spelling" type="button" title="Click to view code example"><code>correct_spelling(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Corrects spelling errors in text using TextBlob probabilistic spellchecker.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="get_noun_phrase" type="button" title="Click to view code example"><code>get_noun_phrase(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[str]</span></td>
+                                <td>Extracts noun phrase strings from text using TextBlob.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="n_grams" type="button" title="Click to view code example"><code>n_grams(x, n=2)</code></button></td>
+                                <td><code>x: str, n: int</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[tuple]</span></td>
+                                <td>Generates word N-Grams (bigrams, trigrams, etc.) from input text.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="singularize_words" type="button" title="Click to view code example"><code>singularize_words(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Converts plural nouns to singular form.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="pluralize_words" type="button" title="Click to view code example"><code>pluralize_words(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Converts singular nouns to plural form.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Category: 4. Safety, Moderation & Sentiment Analysis -->
+            <section id="safety-sentiment" aria-labelledby="safety-sentiment-heading">
+                <h2 id="safety-sentiment-heading">
+                    <i class="fas fa-shield-alt" aria-hidden="true" style="color: var(--accent-amber); margin-right: 10px;"></i>
+                    4. Safety, Moderation & Sentiment Analysis
+                </h2>
+                <p>Profanity detection, toxicity scoring, spam signal detection, sentiment classification, and emotion breakdown.</p>
+
+                <div class="table-wrapper" role="region" aria-label="4. Safety, Moderation & Sentiment Analysis">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Function</th>
+                                <th scope="col">Parameters</th>
+                                <th scope="col">Return Type</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="detect_profanity" type="button" title="Click to view code example"><code>detect_profanity(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-warning" style="font-size:0.7rem; padding: 2px 8px;">bool</span></td>
+                                <td>Returns True if input text contains profanity or explicit words.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="censor_profanity" type="button" title="Click to view code example"><code>censor_profanity(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Censors profanity words with asterisks (****).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="detect_toxicity" type="button" title="Click to view code example"><code>detect_toxicity(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">float</span></td>
+                                <td>Calculates baseline toxicity score (0.0 to 1.0) based on insult/hate keywords.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="detect_spam_signals" type="button" title="Click to view code example"><code>detect_spam_signals(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">dict</span></td>
+                                <td>Detects spam signals (excessive caps, punctuation, URL density).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="sentiment_analysis" type="button" title="Click to view code example"><code>sentiment_analysis(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">dict</span></td>
+                                <td>Performs sentiment classification using TextBlob NaiveBayesAnalyzer.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="polarity_subjectivity" type="button" title="Click to view code example"><code>polarity_subjectivity(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">dict</span></td>
+                                <td>Returns pattern-based sentiment polarity (-1.0 to 1.0) and subjectivity (0.0 to 1.0).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="emotion_detection" type="button" title="Click to view code example"><code>emotion_detection(x)</code></button></td>
+                                <td><code>x: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">dict</span></td>
+                                <td>Calculates lexicon-based emotion counts (joy, anger, sadness, fear).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Category: 5. Pipeline Engine & Custom Workflows -->
+            <section id="pipeline-engine" aria-labelledby="pipeline-engine-heading">
+                <h2 id="pipeline-engine-heading">
+                    <i class="fas fa-project-diagram" aria-hidden="true" style="color: var(--accent-rose); margin-right: 10px;"></i>
+                    5. Pipeline Engine & Custom Workflows
+                </h2>
+                <p>Chain transformations, build custom execution pipelines, process pandas DataFrames, and generate diff reports.</p>
+
+                <div class="table-wrapper" role="region" aria-label="5. Pipeline Engine & Custom Workflows">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Function</th>
+                                <th scope="col">Parameters</th>
+                                <th scope="col">Return Type</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="Pipeline" type="button" title="Click to view code example"><code>Pipeline(steps=None)</code></button></td>
+                                <td><code>steps: list</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">Pipeline</span></td>
+                                <td>Pipeline engine class for chaining and executing sequential text cleaning steps.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="Pipeline_add_step" type="button" title="Click to view code example"><code>Pipeline.add_step(step)</code></button></td>
+                                <td><code>step: callable | str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">Pipeline</span></td>
+                                <td>Appends a step function or registered step name to the pipeline instance.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="Pipeline_run" type="button" title="Click to view code example"><code>Pipeline.run(text)</code></button></td>
+                                <td><code>text: str</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">str</span></td>
+                                <td>Runs all registered pipeline steps sequentially on a single text string.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="Pipeline_run_batch" type="button" title="Click to view code example"><code>Pipeline.run_batch(texts)</code></button></td>
+                                <td><code>texts: list[str]</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">list[str]</span></td>
+                                <td>Runs pipeline transformation across a list of text strings.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="Pipeline_run_series" type="button" title="Click to view code example"><code>Pipeline.run_series(series)</code></button></td>
+                                <td><code>series: pandas.Series</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">Series</span></td>
+                                <td>Applies pipeline transformation across a pandas Series.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="Pipeline_default" type="button" title="Click to view code example"><code>Pipeline.default()</code></button></td>
+                                <td><code>None</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">Pipeline</span></td>
+                                <td>Factory classmethod returning a pre-configured 7-step default cleaning pipeline.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="register_step" type="button" title="Click to view code example"><code>register_step(name)</code></button></td>
+                                <td><code>name: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">decorator</span></td>
+                                <td>Decorator to register a custom python function into the global pipeline registry.</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="diff_report" type="button" title="Click to view code example"><code>diff_report(before_list, after_list)</code></button></td>
+                                <td><code>before_list: list, after_list: list</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">dict</span></td>
+                                <td>Generates summary diff report comparing text before and after pipeline execution.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Category: 6. Environment & Dependency Management -->
+            <section id="environment" aria-labelledby="environment-heading">
+                <h2 id="environment-heading">
+                    <i class="fas fa-cogs" aria-hidden="true" style="color: var(--text-main); margin-right: 10px;"></i>
+                    6. Environment & Dependency Management
+                </h2>
+                <p>Manage spaCy language models and download required NLTK corpora automatically.</p>
+
+                <div class="table-wrapper" role="region" aria-label="6. Environment & Dependency Management">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Function</th>
+                                <th scope="col">Parameters</th>
+                                <th scope="col">Return Type</th>
+                                <th scope="col">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="get_spacy_nlp" type="button" title="Click to view code example"><code>get_spacy_nlp(model_name='en_core_web_sm')</code></button></td>
+                                <td><code>model_name: str</code></td>
+                                <td><span class="badge-success" style="font-size:0.7rem; padding: 2px 8px;">Language</span></td>
+                                <td>Lazy-loads and caches spaCy language model (downloads automatically if missing).</td>
+                            </tr>
+                            <tr>
+                                <td><button class="func-trigger-btn" data-func="download_nltk_packages" type="button" title="Click to view code example"><code>download_nltk_packages()</code></button></td>
+                                <td><code>None</code></td>
+                                <td><span class="badge-version" style="font-size:0.7rem; padding: 2px 8px;">None</span></td>
+                                <td>Downloads required NLTK corpus and model packages (punkt, stopwords, wordnet, etc.).</td>
                             </tr>
                         </tbody>
                     </table>
