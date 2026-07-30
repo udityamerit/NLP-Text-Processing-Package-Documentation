@@ -75,9 +75,9 @@
     --text-on-accent: var(--color-white);
 
     /* — Typography Scale (DESIGN.md §3) — */
-    --fs-display: 4rem;       /* 64px — H1 / Hero */
-    --fs-h2:      2rem;       /* 32px — Section */
-    --fs-h3:      1.2rem;     /* 19.2px — Subtitle */
+    --fs-display: 3.25rem;    /* 52px — H1 / Hero (reduced by ~3pt / 12px) */
+    --fs-h2:      1.75rem;    /* 28px — Section (reduced by ~3pt / 4px) */
+    --fs-h3:      1.05rem;    /* 16.8px — Subtitle (reduced by ~2pt / 2.4px) */
     --fs-body:    1.35rem;    /* 21.6px — Body copy */
     --fs-label:   1.25rem;    /* 20px — Bold label */
     --fs-small:   0.85rem;    /* 13.6px — Helper/caption */
@@ -1845,8 +1845,8 @@ pre[class*="language-"] span,
 /* --- Medium Screen / Tablet Landscape (≤ 1024px) --- */
 @media (max-width: 1024px) {
     :root {
-        --fs-display: 3.25rem;
-        --fs-h2:      1.85rem;
+        --fs-display: 2.75rem;
+        --fs-h2:      1.6rem;
         --fs-body:    1.2rem;
     }
 
@@ -1878,8 +1878,8 @@ pre[class*="language-"] span,
 /* --- Tablet Portrait (≤ 768px) --- */
 @media (max-width: 768px) {
     :root {
-        --fs-display: 2.5rem;
-        --fs-h2:      1.6rem;
+        --fs-display: 2.15rem;
+        --fs-h2:      1.4rem;
         --fs-body:    1.1rem;
         --fs-list:    0.95rem;
     }
@@ -1903,8 +1903,8 @@ pre[class*="language-"] span,
 /* --- Mobile / Smartphone (≤ 480px) --- */
 @media (max-width: 480px) {
     :root {
-        --fs-display: 1.85rem;    /* 30px display font */
-        --fs-h2:      1.3rem;     /* ~21px section headings */
+        --fs-display: 1.6rem;     /* ~25.6px display font */
+        --fs-h2:      1.15rem;    /* ~18.4px section headings */
         --fs-body:    0.98rem;    /* 15.6px readable body */
         --fs-list:    0.88rem;
     }
@@ -1939,7 +1939,7 @@ pre[class*="language-"] span,
     .hero-title {
         word-break: break-word;
         hyphens: auto;
-        font-size: 1.85rem;
+        font-size: 1.6rem;
         line-height: 1.25;
     }
 
