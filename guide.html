@@ -1,230 +1,317 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('docs-theme');
-            if (saved) {
-                document.documentElement.setAttribute('data-theme', saved);
-            }
-        })();
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usage Guide — NLP Text Preprocessing</title>
-    <meta name="description" content="Learn how to use nlp-text-preprocessing: build custom pipelines, integrate with Pandas DataFrames, and process text in batch using the Pipeline automation engine.">
-    <meta name="keywords" content="NLP pipeline, text processing guide, pandas NLP, Python text cleaning tutorial, pipeline automation">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="nlp_logo.png">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress" aria-hidden="true"></div>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User guide · nlp-text-preprocessing</title><meta name="theme-color" content="#ffffff"><meta name="color-scheme" content="light dark"><meta name="description" content="Recipes for pipelines, pandas, scikit-learn, transformer models, PII masking, moderation and the nlp-prep command line.">
+<link rel="icon" href="mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="index.css">
+<script>try { if (localStorage.getItem('docs-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch {}</script>
+<script src="search-index.js" defer></script><script src="app.js" defer></script>
+<noscript><style>.menu,.search-open,.theme,.copy{display:none}</style></noscript>
+</head><body>
+<a href="#main-content" class="skip">Skip to content</a>
+<header class="top"><button class="icon-btn menu" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18 M3 12h18 M3 18h18"/></svg></button>
+<a class="brand" translate="no" href="index.html"><span class="mark" aria-hidden="true"></span><span>nlp-text-preprocessing</span></a><span class="header-tag">Docs</span>
+<div class="utilities"><button class="search-open" aria-label="Search documentation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 16l5 5 M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0"/></svg><span>Search docs…</span><kbd>Ctrl K</kbd></button>
+<a class="repo" href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20c-4 1-4-2-6-2 M15 22v-4c0-1 0-1.6-.7-2.2 3.1-.4 6.3-1.6 6.3-7A5.3 5.3 0 0 0 19.2 5c.2-1 .2-2.3-.3-3.1 0 0-1.2-.4-3.8 1.4a14 14 0 0 0-6.3 0C6.2 1.5 5 1.9 5 1.9 4.5 3 4.5 4.2 4.8 5a5.3 5.3 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7-.6.6-.8 1.3-.8 2.2v4"/></svg><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a><button class="icon-btn theme" aria-label="Switch to dark theme"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0 M12 1v3 M12 20v3 M1 12h3 M20 12h3 M4 4l2 2 M18 18l2 2 M4 20l2-2 M18 6l2-2"/></svg><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15A9 9 0 0 1 9 3a9 9 0 1 0 11 12z"/></svg></button></div></header><noscript>
+<nav class="plain-nav" aria-label="Documentation pages"><a href="index.html">Overview</a>
+<a href="installation.html">Installation</a>
+<a href="guide.html">User guide</a>
+<a href="api.html">API reference</a></nav></noscript>
+<div class="layout">
+<aside id="sidebar" class="sidebar">
+<nav aria-label="Documentation">
+<div class="nav-section">
+<h2>Getting started</h2><a href="index.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3z M9 20v-7h6v7"/></svg>Overview</a>
+<a href="installation.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12 m-5-5 5 5 5-5 M4 16v4h16v-4"/></svg>Installation</a>
+<a href="index.html#quick-start"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 2-10 12h7l-1 8L21 9h-8z"/></svg>Quick start</a></div>
+<div class="nav-section">
+<h2>User guide</h2><a href="guide.html#pipeline"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Build a pipeline</a><a href="guide.html#pandas"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Work with pandas</a><a href="guide.html#batch"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Batch processing</a><a href="guide.html#custom-steps"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Custom steps</a><a href="guide.html#save-load"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Save &amp; reuse</a><a href="guide.html#sklearn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Use with scikit-learn</a><a href="guide.html#transformers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Transformer models</a><a href="guide.html#privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Mask personal data</a><a href="guide.html#moderation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Moderate content</a><a href="guide.html#cli"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Command line</a></div>
+<div class="nav-section">
+<h2>API reference</h2><a href="api.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h7c1 0 2 1 2 2 0-1 1-2 2-2h7v15h-7c-1 0-2 1-2 2 0-1-1-2-2-2H3z M12 6v15"/></svg>All functions</a>
+<a href="api.html#setup"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Setup &amp; resources</a><a href="api.html#cleaning"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Text cleaning</a><a href="api.html#web-social"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Web, social &amp; personal data</a><a href="api.html#statistics"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Counts &amp; statistics</a><a href="api.html#language"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Language analysis</a><a href="api.html#moderation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Sentiment &amp; moderation</a><a href="api.html#transformers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Transformer-model preparation</a><a href="api.html#pipelines"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Pipelines &amp; extensions</a><a href="api.html#visualization"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Visualization</a><a href="api.html#cli"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Command line</a></div>
+<div class="nav-section project">
+<h2>Project</h2><a href="https://pypi.org/project/nlp-text-preprocessing/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 7 9-5 9 5-9 5z M3 7v10l9 5 9-5V7 M12 12v10 M7 5l9 5"/></svg>PyPI package<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20c-4 1-4-2-6-2 M15 22v-4c0-1 0-1.6-.7-2.2 3.1-.4 6.3-1.6 6.3-7A5.3 5.3 0 0 0 19.2 5c.2-1 .2-2.3-.3-3.1 0 0-1.2-.4-3.8 1.4a14 14 0 0 0-6.3 0C6.2 1.5 5 1.9 5 1.9 4.5 3 4.5 4.2 4.8 5a5.3 5.3 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7-.6.6-.8 1.3-.8 2.2v4"/></svg>Source code<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing/blob/main/CHANGELOG.md"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5"/></svg>Changelog<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://pepy.tech/projects/nlp-text-preprocessing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v17h18 M7 15l4-5 4 2 5-7"/></svg>Download statistics<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></div></nav>
+<a class="release" href="https://pypi.org/project/nlp-text-preprocessing/0.5.1/"><span class="release-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5"/></svg></span><span>Package version<small>v0.5.1</small></span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></aside>
+<main id="main-content" tabindex="-1">
+<div class="content">
+<nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Docs</a><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><span>User guide</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><strong aria-current="page">Recipes</strong></nav>
+<div class="article-intro">
+<h1>User guide</h1><p>Task-focused recipes. Every example runs as written, and the output shown is real.</p></div><div class="reading-layout">
+<article>
+<section class="doc-section" id="pipeline">
+<h2>Build a pipeline</h2><p>A step is the name of a built-in function, a name you registered, a callable, or a <code>(name, kwargs)</code> pair. Every step except the last must return a string. Names are checked when the pipeline is created, so a typo fails immediately.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-    <!-- Top Navigation Bar -->
-    <header class="navbar">
-        <div style="display: flex; align-items: center; gap: 16px;">
-            <button class="mobile-toggle" id="mobile-menu-btn" type="button" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
-            <a href="index.html" class="nav-brand">
-                <img src="nlp_logo.png" alt="nlp-text-preprocessing logo" class="brand-logo-img">
-                <span>nlp-text-preprocessing</span>
-            </a>
-        </div>
-
-        <div class="nav-controls">
-            <a href="https://pepy.tech/projects/nlp-text-preprocessing" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-analytics" aria-label="PePy Analytics">
-                <i class="fas fa-chart-line" aria-hidden="true"></i>
-                <span>PePy Analytics</span>
-            </a>
-            <a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-pypi" aria-label="PyPI Package">
-                <i class="fas fa-box" aria-hidden="true"></i>
-                <span>PyPI Package</span>
-            </a>
-            <a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-github" aria-label="GitHub Repository">
-                <i class="fab fa-github" aria-hidden="true"></i>
-                <span>GitHub Repo</span>
-            </a>
-            <button class="btn-icon" id="theme-toggle-btn" type="button" aria-label="Toggle Dark/Light Mode">
-                <span id="theme-icon" aria-hidden="true">🌙</span>
-            </button>
-        </div>
-    </header>
-
-    <div class="app-container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
-            <div class="sidebar-section">
-                <div class="sidebar-title">Documentation</div>
-                <ul class="sidebar-nav" role="list">
-                    <li><a href="index.html" class="sidebar-link"><i class="fas fa-home" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Introduction &amp; Setup</span></a></li>
-                    <li><a href="guide.html" class="sidebar-link active"><i class="fas fa-book-open" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Usage Guide</span></a></li>
-                    <li><a href="api.html" class="sidebar-link"><i class="fas fa-code" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>API Reference</span></a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">Topics</div>
-                <ul class="sidebar-nav" role="list">
-                    <li><a href="#pipeline" class="sidebar-link sub"><span>Pipeline Engine</span></a></li>
-                    <li><a href="#pandas" class="sidebar-link sub"><span>Pandas Integration</span></a></li>
-                    <li><a href="#batch" class="sidebar-link sub"><span>Batch Processing</span></a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">Project Links</div>
-                <ul class="sidebar-nav" role="list">
-                    <li><a href="https://udityanarayantiwari.netlify.app/" target="_blank" rel="noopener noreferrer" class="sidebar-link"><i class="fas fa-user-astronaut" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Author Portfolio</span></a></li>
-                    <li><a href="https://pepy.tech/projects/nlp-text-preprocessing" target="_blank" class="sidebar-link"><i class="fas fa-chart-bar" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PePy Analytics</span></a></li>
-                    <li><a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" class="sidebar-link"><i class="fas fa-box" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PyPI Package</span></a></li>
-                    <li><a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank" class="sidebar-link"><i class="fab fa-github" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>GitHub Repository</span></a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
-
-        <!-- Main Content Area -->
-        <main class="main-content" id="main-content">
-
-            <!-- Breadcrumb -->
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="index.html" style="border-bottom: none; font-size: inherit; font-weight: 400; color: var(--text-muted);">Home</a>
-                <span class="breadcrumb-sep" aria-hidden="true">/</span>
-                <span style="color: var(--text-main); font-weight: 600;">Usage Guide</span>
-            </nav>
-
-            <h1 style="margin-top: 0;">Usage Guide</h1>
-            <p>Learn how to use the advanced features of the <code>nlp_text_preprocessing</code> package — from building custom pipelines to seamlessly integrating with Pandas DataFrames.</p>
-
-            <div class="alert alert-success" role="note">
-                <div class="alert-title"><i class="fas fa-check-circle" aria-hidden="true"></i> Quick Install</div>
-                <p>Haven't installed yet? Run <code>pip install nlp-text-preprocessing</code> then import with <code>import nlp_text_preprocessing as tp</code>.</p>
-            </div>
-
-            <!-- 1. Pipeline Engine -->
-            <section id="pipeline" aria-labelledby="pipeline-heading">
-                <h2 id="pipeline-heading">
-                    <i class="fas fa-cogs" aria-hidden="true" style="color: var(--accent-cyan); margin-right: 10px;"></i>
-                    1. Pipeline Automation Engine
-                </h2>
-                <p>The <code>Pipeline</code> class allows you to chain cleaning and transformation steps cleanly without messy nested function calls. Define your steps once and reuse them across your project.</p>
-
-                <pre><code class="language-python">import nlp_text_preprocessing as tp
-
-# Build a custom step pipeline
 pipe = tp.Pipeline([
-    'to_lower_case',
-    'expand_hashtags',
-    'remove_urls',
-    'remove_emails',
-    'remove_extra_whitespace',
-    'convert_to_base'
+    <span class="str">&quot;remove_html_tag&quot;</span>,
+    <span class="str">&quot;remove_urls&quot;</span>,
+    <span class="str">&quot;to_lower_case&quot;</span>,
+    <span class="str">&quot;contraction_to_expansion&quot;</span>,
+    <span class="str">&quot;remove_special_chars&quot;</span>,
+    <span class="str">&quot;remove_extra_whitespace&quot;</span>,
 ])
+print(pipe.run(<span class="str">&quot;&lt;p&gt;It&#x27;s GREAT!! Read https://example.com&lt;/p&gt;&quot;</span>))</code></pre><div class="result"><span>Output</span><samp>it is great read</samp></div></div><h3>Pass arguments to a step</h3><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-# Process a single text string
-raw_text = "Check out #MachineLearning at https://example.com!"
-clean_result = pipe.run(raw_text)
+pipe = tp.Pipeline([
+    <span class="str">&quot;to_lower_case&quot;</span>,
+    (<span class="str">&quot;remove_stop_words&quot;</span>, {<span class="str">&quot;keep_negations&quot;</span>: <span class="num">False</span>}),
+])
+print(pipe.run(<span class="str">&quot;This is NOT a drill&quot;</span>))
+print(pipe)</code></pre><div class="result"><span>Output</span><samp>drill
+Pipeline([&#x27;to_lower_case&#x27;, &quot;remove_stop_words{&#x27;keep_negations&#x27;: False}&quot;])</samp></div></div><h3>End with a measurement</h3><p>The final step may return a number, label, list or dictionary instead of text.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-print(clean_result)
-# Output: "check out machine learning at"</code></pre>
+pipe = tp.Pipeline([<span class="str">&quot;remove_urls&quot;</span>, <span class="str">&quot;remove_html_tag&quot;</span>, <span class="str">&quot;sentiment_analysis&quot;</span>])
+print(pipe.run(<span class="str">&quot;&lt;p&gt;I really love this! https://example.com&lt;/p&gt;&quot;</span>))</code></pre><div class="result"><span>Output</span><samp>pos</samp></div></div><h3>Build step by step</h3><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-                <div class="alert" role="note">
-                    <div class="alert-title"><i class="fas fa-magic" aria-hidden="true"></i> Default Pipeline</div>
-                    <p>Just want standard cleaning without configuring individual steps? Use <code>pipe = tp.Pipeline.default()</code> — it includes the most common sanitization routines automatically.</p>
-                </div>
-            </section>
+pipe = tp.Pipeline()
+pipe.add_step(<span class="str">&quot;to_lower_case&quot;</span>).add_step(<span class="str">&quot;remove_extra_whitespace&quot;</span>)
+print(len(pipe), pipe.run(<span class="str">&quot;  Mixed   CASE  &quot;</span>))</code></pre><div class="result"><span>Output</span><samp>2 mixed case</samp></div></div><h3>Errors are explicit</h3><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-            <!-- 2. Pandas Integration -->
-            <section id="pandas" aria-labelledby="pandas-heading">
-                <h2 id="pandas-heading">
-                    <i class="fas fa-table" aria-hidden="true" style="color: var(--accent-emerald); margin-right: 10px;"></i>
-                    2. Pandas DataFrame Integration
-                </h2>
-                <p>Because all functions have built-in NaN/None defensive guards, you can use them directly on DataFrame columns with <code>.apply()</code> — no lambda wrappers needed.</p>
+<span class="kw">try</span>:
+    tp.Pipeline([<span class="str">&quot;to_lowercase&quot;</span>])
+<span class="kw">except</span> Exception <span class="kw">as</span> exc:
+    print(type(exc).__name__ + <span class="str">&quot;:&quot;</span>, exc)
 
-                <pre><code class="language-python">import pandas as pd
-import nlp_text_preprocessing as tp
+<span class="kw">try</span>:
+    tp.Pipeline([<span class="str">&quot;text_stats&quot;</span>, <span class="str">&quot;to_lower_case&quot;</span>]).run(<span class="str">&quot;hello&quot;</span>)
+<span class="kw">except</span> TypeError <span class="kw">as</span> exc:
+    print(<span class="str">&quot;TypeError:&quot;</span>, exc)</code></pre><div class="result"><span>Output</span><samp>ValueError: Pipeline step &#x27;to_lowercase&#x27; is not available.
+TypeError: Pipeline step &#x27;text_stats&#x27; returned dict, but only the last step may return a non-string.</samp></div></div><a class="onward" href="api.html#Pipeline">Pipeline reference<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></a></section>
+<section class="doc-section" id="pandas">
+<h2>Work with pandas</h2><p>Install the extra with <code>pip install &quot;nlp-text-preprocessing[pandas]&quot;</code>. <code>run_series</code> keeps the index and name; missing values become empty strings.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-# Sample messy data with None and NaN rows
-df = pd.DataFrame({
-    'comments': [
-        "Great product! http://buy.me",
-        None,
-        "Terrible service 😡",
-        float('nan')
-    ]
-})
+df = pd.DataFrame({<span class="str">&quot;review&quot;</span>: [<span class="str">&quot;&lt;b&gt;LOVED&lt;/b&gt; it!! \U0001f60d&quot;</span>, <span class="str">&quot;Not good, https://spam.io&quot;</span>, <span class="num">None</span>]})
+df[<span class="str">&quot;clean&quot;</span>] = tp.Pipeline.default().run_series(df[<span class="str">&quot;review&quot;</span>])
+print(df)</code></pre><div class="result"><span>Output</span><samp>                      review     clean
+0        &lt;b&gt;LOVED&lt;/b&gt; it!! 😍  loved it
+1  Not good, https://spam.io  not good
+2                        NaN</samp></div></div><h3>Feature table in one call</h3><p><code>text_stats_batch</code> returns one row of statistics per text.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-# Apply a single function safely — no try/except needed
-df['clean_comments'] = df['comments'].apply(tp.remove_urls)
+df = pd.DataFrame({<span class="str">&quot;text&quot;</span>: [<span class="str">&quot;Short one.&quot;</span>, <span class="str">&quot;A longer sentence, with #tags and @mentions!&quot;</span>]})
+features = tp.text_stats_batch(df, <span class="str">&quot;text&quot;</span>)
+print(features[[<span class="str">&quot;word_count&quot;</span>, <span class="str">&quot;sentence_count&quot;</span>, <span class="str">&quot;hashtags_count&quot;</span>, <span class="str">&quot;mentions_count&quot;</span>]].astype(int))</code></pre><div class="result"><span>Output</span><samp>   word_count  sentence_count  hashtags_count  mentions_count
+0           2               1               0               0
+1           7               1               1               1</samp></div></div><h3>Apply any single function</h3><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> pandas <span class="kw">as</span> pd
+<span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-# Or apply an entire pipeline over a series
-pipe = tp.Pipeline(['to_lower_case', 'emoji_to_text'])
-df['processed'] = pipe.run_series(df['comments'])
+s = pd.Series([<span class="str">&quot;Call 555-123-4567&quot;</span>, <span class="str">&quot;No phone here&quot;</span>])
+print(s.map(tp.count_phone_numbers).tolist())</code></pre><div class="result"><span>Output</span><samp>[1, 0]</samp></div></div></section>
+<section class="doc-section" id="batch">
+<h2>Batch processing</h2><p>Use <code>run_batch</code> for lists. Steps run across the whole list one after another, and the spaCy steps (<code>lemmatize</code>, <code>convert_to_base</code>, <code>singularize_words</code>, <code>pluralize_words</code>) use <code>nlp.pipe</code>, which is several times faster than calling them text by text.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-print(df[['comments', 'processed']])</code></pre>
+pipe = tp.Pipeline([<span class="str">&quot;remove_html_tag&quot;</span>, <span class="str">&quot;to_lower_case&quot;</span>, <span class="str">&quot;lemmatize&quot;</span>, <span class="str">&quot;remove_stop_words&quot;</span>])
+texts = [<span class="str">&quot;The &lt;b&gt;dogs&lt;/b&gt; were barking loudly&quot;</span>, <span class="str">&quot;She has been studying for exams&quot;</span>]
+print(pipe.run_batch(texts))</code></pre><div class="result"><span>Output</span><samp>[&#x27;dog bark loudly&#x27;, &#x27;study exam&#x27;]</samp></div></div><h3>Measure what cleaning changed</h3><p><code>diff_report</code> summarizes characters, words, URLs and emails removed between two lists.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-                <div class="alert alert-success" role="note">
-                    <div class="alert-title"><i class="fas fa-shield-alt" aria-hidden="true"></i> Null Safety in Action</div>
-                    <p>The <code>None</code> and <code>float('nan')</code> rows in the example above are handled automatically — they return empty strings (<code>""</code>) instead of raising <code>AttributeError</code> or <code>TypeError</code>.</p>
-                </div>
-            </section>
+before = [<span class="str">&quot;&lt;p&gt;Mail me@x.com&lt;/p&gt;&quot;</span>, <span class="str">&quot;Plain text&quot;</span>, <span class="str">&quot;See https://example.com now&quot;</span>]
+after = tp.Pipeline.default().run_batch(before)
+print(tp.diff_report(before, after))</code></pre><div class="result"><span>Output</span><samp>{&#x27;total_items&#x27;: 3, &#x27;chars_before&#x27;: 57, &#x27;chars_after&#x27;: 21, &#x27;char_reduction_pct&#x27;: 63.16, &#x27;words_before&#x27;: 7, &#x27;words_after&#x27;: 5, &#x27;word_reduction_pct&#x27;: 28.57, &#x27;emails_removed&#x27;: 1, &#x27;urls_removed&#x27;: 1}</samp></div></div></section>
+<section class="doc-section" id="custom-steps">
+<h2>Custom steps</h2><p>Register a function once and use it by name. The first argument is the text; extra keyword arguments come from the step's <code>kwargs</code>.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-            <!-- 3. Batch Processing -->
-            <section id="batch" aria-labelledby="batch-heading">
-                <h2 id="batch-heading">
-                    <i class="fas fa-layer-group" aria-hidden="true" style="color: var(--accent-violet); margin-right: 10px;"></i>
-                    3. Batch Feature Extraction
-                </h2>
-                <p>Use <code>text_stats_batch()</code> to compute multiple features at once across an entire DataFrame column, returning a new DataFrame of features ready for ML pipelines.</p>
+<span class="kw">import</span> re
 
-                <pre><code class="language-python">import pandas as pd
-import nlp_text_preprocessing as tp
+@tp.register_step(<span class="str">&quot;strip_ticket_ids&quot;</span>)
+<span class="kw">def</span> strip_ticket_ids(text, prefix=<span class="str">&quot;TKT&quot;</span>):
+    <span class="kw">return</span> re.sub(rf&quot;{prefix}-\d+&quot;, <span class="str">&quot;&quot;</span>, text)
 
-df = pd.DataFrame({
-    'reviews': [
-        "The product quality is excellent and delivery was fast!",
-        "Terrible experience, will never buy again.",
-        "Average product, nothing special."
-    ]
-})
+pipe = tp.Pipeline([
+    <span class="str">&quot;to_lower_case&quot;</span>,
+    (<span class="str">&quot;strip_ticket_ids&quot;</span>, {<span class="str">&quot;prefix&quot;</span>: <span class="str">&quot;tkt&quot;</span>}),
+    <span class="str">&quot;remove_extra_whitespace&quot;</span>,
+])
+print(pipe.run(<span class="str">&quot;Re: TKT-4821 printer is  broken&quot;</span>))</code></pre><div class="result"><span>Output</span><samp>re: printer is broken</samp></div></div><p>Plain callables work too, but only registered names can be saved to JSON.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-# One call — returns word_count, char_count, avg_word_len, sentence_count, etc.
-features = tp.text_stats_batch(df, col='reviews')
+pipe = tp.Pipeline([<span class="str">&quot;to_lower_case&quot;</span>, <span class="kw">lambda</span> t: t.replace(<span class="str">&quot;colour&quot;</span>, <span class="str">&quot;color&quot;</span>)])
+print(pipe.run(<span class="str">&quot;Favourite COLOUR&quot;</span>))
 
-print(features.head())
-#    word_count  char_count  avg_word_len  sentence_count  stop_words_count
-# 0           9          49          4.78               1                 4
-# 1           7          41          4.86               1                 2
-# 2           5          31          5.20               1                 1</code></pre>
+<span class="kw">try</span>:
+    pipe.to_config()
+<span class="kw">except</span> ValueError <span class="kw">as</span> exc:
+    print(<span class="str">&quot;ValueError:&quot;</span>, exc)</code></pre><div class="result"><span>Output</span><samp>favourite color
+ValueError: Step &#x27;&lt;lambda&gt;&#x27; is a custom callable and cannot be saved. Register it with @register_step(&#x27;name&#x27;) and use that name.</samp></div></div></section>
+<section class="doc-section" id="save-load">
+<h2>Save &amp; reuse</h2><p>Pipelines serialize to JSON, so the exact preprocessing used in training can ship with the model.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-                <div class="alert alert-warning" role="note">
-                    <div class="alert-title"><i class="fas fa-info-circle" aria-hidden="true"></i> Performance Tip</div>
-                    <p>For very large DataFrames (&gt; 1M rows), consider chunking your data or using <code>pipe.run_series()</code> with <code>pandas.Series.swifter.apply()</code> for parallel execution.</p>
-                </div>
-            </section>
+<span class="kw">import</span> os, tempfile
 
-            <!-- Page Navigation -->
-            <nav class="page-nav" aria-label="Page navigation">
-                <a href="index.html" class="page-nav-btn prev">
-                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
-                    <span>Intro &amp; Setup</span>
-                </a>
-                <a href="api.html" class="page-nav-btn next">
-                    <span>API Reference</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </nav>
+pipe = tp.Pipeline([<span class="str">&quot;remove_urls&quot;</span>, (<span class="str">&quot;remove_stop_words&quot;</span>, {<span class="str">&quot;keep_negations&quot;</span>: <span class="num">True</span>}), <span class="str">&quot;to_lower_case&quot;</span>])
+path = os.path.join(tempfile.mkdtemp(), <span class="str">&quot;preprocess.json&quot;</span>)
+pipe.save(path)
+print(open(path).read())
 
-        </main>
-    </div>
+restored = tp.Pipeline.load(path)
+print(restored.run(<span class="str">&quot;This is NOT bad https://x.io&quot;</span>))</code></pre><div class="result"><span>Output</span><samp>{
+  &quot;version&quot;: 1,
+  &quot;steps&quot;: [
+    &quot;remove_urls&quot;,
+    {
+      &quot;step&quot;: &quot;remove_stop_words&quot;,
+      &quot;args&quot;: {
+        &quot;keep_negations&quot;: true
+      }
+    },
+    &quot;to_lower_case&quot;
+  ]
+}
+not bad</samp></div></div><p>For your own storage use <code>to_config()</code> and <code>Pipeline.from_config()</code>. The same file works from the command line with <code>nlp-prep clean --pipeline preprocess.json</code>.</p><a class="onward" href="api.html#Pipeline.save">save and load reference<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></a></section>
+<section class="doc-section" id="sklearn">
+<h2>Use with scikit-learn</h2><p><code>TextPreprocessor</code> wraps a pipeline as a transformer, so cleaning travels with the model and is applied identically at predict time. Requires <code>pip install &quot;nlp-text-preprocessing[sklearn]&quot;</code>.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">from</span> sklearn.feature_extraction.text <span class="kw">import</span> TfidfVectorizer
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
+<span class="kw">from</span> sklearn.pipeline <span class="kw">import</span> make_pipeline
+<span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
-    <script src="app.js" defer></script>
-</body>
-</html>
+texts = [<span class="str">&quot;&lt;b&gt;Great&lt;/b&gt; movie!&quot;</span>, <span class="str">&quot;Terrible film...&quot;</span>, <span class="str">&quot;Loved this great film&quot;</span>, <span class="str">&quot;Awful acting, terrible plot&quot;</span>]
+labels = [<span class="num">1</span>, <span class="num">0</span>, <span class="num">1</span>, <span class="num">0</span>]
+
+model = make_pipeline(
+    tp.TextPreprocessor([<span class="str">&quot;remove_html_tag&quot;</span>, <span class="str">&quot;to_lower_case&quot;</span>, <span class="str">&quot;remove_special_chars&quot;</span>]),
+    TfidfVectorizer(),
+    LogisticRegression(),
+)
+model.fit(texts, labels)
+print(model.predict([<span class="str">&quot;A great movie&quot;</span>, <span class="str">&quot;Terrible!&quot;</span>]))</code></pre><div class="result"><span>Output</span><samp>[1 0]</samp></div></div><p>Because the steps are a parameter, grid search can tune the cleaning itself.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">from</span> sklearn.feature_extraction.text <span class="kw">import</span> TfidfVectorizer
+<span class="kw">from</span> sklearn.pipeline <span class="kw">import</span> make_pipeline
+<span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+model = make_pipeline(tp.TextPreprocessor([<span class="str">&quot;to_lower_case&quot;</span>]), TfidfVectorizer())
+model.set_params(textpreprocessor__steps=[<span class="str">&quot;to_lower_case&quot;</span>, <span class="str">&quot;remove_stop_words&quot;</span>])
+print(model.get_params()[<span class="str">&quot;textpreprocessor__steps&quot;</span>])</code></pre><div class="result"><span>Output</span><samp>[&#x27;to_lower_case&#x27;, &#x27;remove_stop_words&#x27;]</samp></div></div></section>
+<section class="doc-section" id="transformers">
+<h2>Transformer models</h2><p>BERT and GPT style models were trained on natural text. Use <code>light_clean</code> to remove noise only, and keep case, punctuation and word forms.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+raw = <span class="str">&quot;&lt;p&gt;Can&#x27;t BELIEVE it&#x27;s &amp;amp; working!! \u2764\ufe0f  https://example.com&lt;/p&gt;&quot;</span>
+print(tp.light_clean(raw))
+print(tp.clean_text(raw))</code></pre><div class="result"><span>Output</span><samp>Can&#x27;t BELIEVE it&#x27;s &amp; working!! ❤️
+cannot believe it be work</samp></div></div><p>Compare: <code>clean_text</code> is the classic route for bag-of-words models and removes the information a transformer uses.</p><h3>Respect the token limit</h3><p>Without a tokenizer, whitespace words are a rough stand-in. Pass any callable that returns tokens.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+text = <span class="str">&quot;one two three four five six seven eight nine ten&quot;</span>
+print(tp.truncate_text(text, max_tokens=<span class="num">4</span>))
+<span class="kw">for</span> chunk <span class="kw">in</span> tp.chunk_text(text, max_tokens=<span class="num">4</span>, overlap=<span class="num">1</span>):
+    print(chunk)</code></pre><div class="result"><span>Output</span><samp>one two three four
+one two three four
+four five six seven
+seven eight nine ten</samp></div></div><p>With a real tokenizer, counts match what the model sees. Leave room for special tokens such as <code>[CLS]</code> and <code>[SEP]</code>.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+<span class="kw">from</span> transformers <span class="kw">import</span> AutoTokenizer
+
+tok = AutoTokenizer.from_pretrained(<span class="str">&quot;bert-base-uncased&quot;</span>)
+chunks = tp.chunk_text(long_document, max_tokens=<span class="num">500</span>, overlap=<span class="num">50</span>, tokenizer=tok)</code></pre></div></section>
+<section class="doc-section" id="privacy">
+<h2>Mask personal data</h2><p><code>mask_pii</code> redacts emails, card numbers, US Social Security numbers and phone numbers. Set <code>names=True</code> to add person names (uses spaCy and is statistical, so review the output when privacy matters).</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+record = <span class="str">&quot;Contact Priya Sharma at priya@example.com or 555-123-4567. Card 4111 1111 1111 1111.&quot;</span>
+print(tp.mask_pii(record))
+print(tp.mask_pii(record, token=<span class="str">&quot;&lt;PII&gt;&quot;</span>, names=<span class="num">True</span>))</code></pre><div class="result"><span>Output</span><samp>Contact Priya Sharma at [REDACTED] or [REDACTED]. Card [REDACTED].
+Contact &lt;PII&gt; at &lt;PII&gt; or &lt;PII&gt;. Card &lt;PII&gt;.</samp></div></div><p>Count first, remove selectively, or mask everything.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+text = <span class="str">&quot;Email a@b.com, call 555-123-4567, see https://example.com&quot;</span>
+print(tp.count_emails(text), tp.count_phone_numbers(text), tp.count_urls(text))
+print(tp.remove_phone_numbers(tp.remove_emails(text)))</code></pre><div class="result"><span>Output</span><samp>1 1 1
+Email , call , see https://example.com</samp></div></div></section>
+<section class="doc-section" id="moderation">
+<h2>Moderate content</h2><p>The moderation helpers are transparent keyword baselines. They are useful for triage and dashboards, not as a replacement for a trained classifier.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+comment = <span class="str">&quot;You damn idiot. CLICK HERE!!! BUY NOW http://spam.example&quot;</span>
+
+print(<span class="str">&quot;profane:&quot;</span>, tp.detect_profanity(comment))
+print(<span class="str">&quot;toxicity:&quot;</span>, tp.detect_toxicity(comment))
+print(<span class="str">&quot;spam:&quot;</span>, tp.detect_spam_signals(comment)[<span class="str">&quot;is_spam_candidate&quot;</span>])
+print(tp.censor_profanity(<span class="str">&quot;What the hell, damn it&quot;</span>))</code></pre><div class="result"><span>Output</span><samp>profane: True
+toxicity: 0.5
+spam: True
+What the ****, **** it</samp></div></div><h3>Understand a score</h3><p><code>toxicity_report</code> lists what matched and what a negation cancelled, so reviewers can see why a text scored as it did.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+print(tp.toxicity_report(<span class="str">&quot;You idiot. I do not hate you.&quot;</span>))</code></pre><div class="result"><span>Output</span><samp>{&#x27;score&#x27;: 0.5, &#x27;matches&#x27;: [{&#x27;word&#x27;: &#x27;idiot&#x27;, &#x27;weight&#x27;: 1.0, &#x27;targeted&#x27;: True}], &#x27;ignored&#x27;: [{&#x27;word&#x27;: &#x27;hate&#x27;, &#x27;weight&#x27;: 1.0, &#x27;targeted&#x27;: True}]}</samp></div></div><h3>Tune the word list</h3><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+print(tp.detect_profanity(<span class="str">&quot;what the hell&quot;</span>, include_mild=<span class="num">False</span>))
+print(tp.detect_profanity(<span class="str">&quot;that was a frack-up&quot;</span>, extra_words=[<span class="str">&quot;frack&quot;</span>]))</code></pre><div class="result"><span>Output</span><samp>False
+True</samp></div></div></section>
+<section class="doc-section" id="cli">
+<h2>Command line</h2><p>The <code>nlp-prep</code> command (or <code>python -m nlp_text_preprocessing</code>) cleans text without writing Python. Input is a <code>.txt</code> file with one document per line, a CSV column, or standard input (<code>-</code>).</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="comment"># one document per line, light cleaning for transformer models (default)</span>
+nlp-prep clean reviews.txt -o cleaned.txt
+
+<span class="comment"># a CSV column; the result goes to &lt;column&gt;_clean</span>
+nlp-prep clean reviews.csv --column review -o cleaned.csv
+
+<span class="comment"># classic cleaning: lowercase, no punctuation, lemmatized, stop words removed</span>
+nlp-prep clean reviews.txt --mode standard --stopwords
+
+<span class="comment"># your own steps, or a saved pipeline</span>
+nlp-prep clean reviews.txt --steps remove_urls,to_lower_case
+nlp-prep clean reviews.txt --pipeline preprocess.json</code></pre></div><p>It also works in shell pipelines:</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>echo &quot;&lt;b&gt;Hello   WORLD&lt;/b&gt; https://example.com&quot; | nlp-prep clean - --url-token &quot;[URL]&quot;</code></pre><div class="result"><span>Output</span><samp>Hello WORLD [URL]</samp></div></div><a class="onward" href="api.html#nlp-prep-clean">All command options<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></a></section>
+</article>
+<nav class="page-outline" aria-label="On this page">
+<h2>On this page</h2><a href="#pipeline">Build a pipeline</a>
+<a href="#pandas">Work with pandas</a>
+<a href="#batch">Batch processing</a>
+<a href="#custom-steps">Custom steps</a>
+<a href="#save-load">Save &amp; reuse</a>
+<a href="#sklearn">Use with scikit-learn</a>
+<a href="#transformers">Transformer models</a>
+<a href="#privacy">Mask personal data</a>
+<a href="#moderation">Moderate content</a>
+<a href="#cli">Command line</a></nav></div>
+<footer><span><span class="mark" aria-hidden="true"></span> nlp-text-preprocessing v0.5.1</span><a href="https://udityanarayantiwari.netlify.app/">Uditya Narayan Tiwari <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></footer></div></main></div>
+<dialog class="search-dialog" aria-labelledby="search-title">
+<div class="search-head">
+<h2 id="search-title">Search documentation</h2><button class="icon-btn close-search" aria-label="Close search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14 M19 5 5 19"/></svg></button></div>
+<label class="search-field"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 16l5 5 M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0"/></svg><input type="search" name="docs-search" autocomplete="off" spellcheck="false" placeholder="Try pipeline or word_count…" aria-label="Search guides and API functions"></label><p class="search-status" role="status"></p>
+<div class="results"></div></dialog>
+</body></html>

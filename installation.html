@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installation · nlp-text-preprocessing</title><meta name="theme-color" content="#ffffff"><meta name="color-scheme" content="light dark"><meta name="description" content="Install nlp-text-preprocessing 0.5.1, choose optional extras and download the spaCy and NLTK resources.">
+<link rel="icon" href="mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="index.css">
+<script>try { if (localStorage.getItem('docs-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch {}</script>
+<script src="search-index.js" defer></script><script src="app.js" defer></script>
+<noscript><style>.menu,.search-open,.theme,.copy{display:none}</style></noscript>
+</head><body>
+<a href="#main-content" class="skip">Skip to content</a>
+<header class="top"><button class="icon-btn menu" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18 M3 12h18 M3 18h18"/></svg></button>
+<a class="brand" translate="no" href="index.html"><span class="mark" aria-hidden="true"></span><span>nlp-text-preprocessing</span></a><span class="header-tag">Docs</span>
+<div class="utilities"><button class="search-open" aria-label="Search documentation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 16l5 5 M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0"/></svg><span>Search docs…</span><kbd>Ctrl K</kbd></button>
+<a class="repo" href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20c-4 1-4-2-6-2 M15 22v-4c0-1 0-1.6-.7-2.2 3.1-.4 6.3-1.6 6.3-7A5.3 5.3 0 0 0 19.2 5c.2-1 .2-2.3-.3-3.1 0 0-1.2-.4-3.8 1.4a14 14 0 0 0-6.3 0C6.2 1.5 5 1.9 5 1.9 4.5 3 4.5 4.2 4.8 5a5.3 5.3 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7-.6.6-.8 1.3-.8 2.2v4"/></svg><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a><button class="icon-btn theme" aria-label="Switch to dark theme"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0 M12 1v3 M12 20v3 M1 12h3 M20 12h3 M4 4l2 2 M18 18l2 2 M4 20l2-2 M18 6l2-2"/></svg><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15A9 9 0 0 1 9 3a9 9 0 1 0 11 12z"/></svg></button></div></header><noscript>
+<nav class="plain-nav" aria-label="Documentation pages"><a href="index.html">Overview</a>
+<a href="installation.html">Installation</a>
+<a href="guide.html">User guide</a>
+<a href="api.html">API reference</a></nav></noscript>
+<div class="layout">
+<aside id="sidebar" class="sidebar">
+<nav aria-label="Documentation">
+<div class="nav-section">
+<h2>Getting started</h2><a href="index.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3z M9 20v-7h6v7"/></svg>Overview</a>
+<a href="installation.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12 m-5-5 5 5 5-5 M4 16v4h16v-4"/></svg>Installation</a>
+<a href="index.html#quick-start"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 2-10 12h7l-1 8L21 9h-8z"/></svg>Quick start</a></div>
+<div class="nav-section">
+<h2>User guide</h2><a href="guide.html#pipeline"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Build a pipeline</a><a href="guide.html#pandas"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Work with pandas</a><a href="guide.html#batch"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Batch processing</a><a href="guide.html#custom-steps"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Custom steps</a><a href="guide.html#save-load"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Save &amp; reuse</a><a href="guide.html#sklearn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Use with scikit-learn</a><a href="guide.html#transformers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Transformer models</a><a href="guide.html#privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Mask personal data</a><a href="guide.html#moderation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Moderate content</a><a href="guide.html#cli"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Command line</a></div>
+<div class="nav-section">
+<h2>API reference</h2><a href="api.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h7c1 0 2 1 2 2 0-1 1-2 2-2h7v15h-7c-1 0-2 1-2 2 0-1-1-2-2-2H3z M12 6v15"/></svg>All functions</a>
+<a href="api.html#setup"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Setup &amp; resources</a><a href="api.html#cleaning"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Text cleaning</a><a href="api.html#web-social"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Web, social &amp; personal data</a><a href="api.html#statistics"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Counts &amp; statistics</a><a href="api.html#language"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Language analysis</a><a href="api.html#moderation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Sentiment &amp; moderation</a><a href="api.html#transformers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Transformer-model preparation</a><a href="api.html#pipelines"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Pipelines &amp; extensions</a><a href="api.html#visualization"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Visualization</a><a href="api.html#cli"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Command line</a></div>
+<div class="nav-section project">
+<h2>Project</h2><a href="https://pypi.org/project/nlp-text-preprocessing/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 7 9-5 9 5-9 5z M3 7v10l9 5 9-5V7 M12 12v10 M7 5l9 5"/></svg>PyPI package<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20c-4 1-4-2-6-2 M15 22v-4c0-1 0-1.6-.7-2.2 3.1-.4 6.3-1.6 6.3-7A5.3 5.3 0 0 0 19.2 5c.2-1 .2-2.3-.3-3.1 0 0-1.2-.4-3.8 1.4a14 14 0 0 0-6.3 0C6.2 1.5 5 1.9 5 1.9 4.5 3 4.5 4.2 4.8 5a5.3 5.3 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7-.6.6-.8 1.3-.8 2.2v4"/></svg>Source code<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing/blob/main/CHANGELOG.md"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5"/></svg>Changelog<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://pepy.tech/projects/nlp-text-preprocessing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v17h18 M7 15l4-5 4 2 5-7"/></svg>Download statistics<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></div></nav>
+<a class="release" href="https://pypi.org/project/nlp-text-preprocessing/0.5.1/"><span class="release-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5"/></svg></span><span>Package version<small>v0.5.1</small></span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></aside>
+<main id="main-content" tabindex="-1">
+<div class="content">
+<nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Docs</a><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><span>Getting started</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><strong aria-current="page">Installation</strong></nav>
+<div class="article-intro">
+<h1>Installation</h1><p>Set up an isolated environment and install version 0.5.1 from PyPI. Python 3.9 or later is required.</p></div><div class="reading-layout">
+<article>
+<section class="doc-section" id="environment">
+<h2>Create an environment</h2><p>Use a virtual environment. Python 3.9 or later is required.</p>
+<div class="os-tabs" aria-label="Environment"></div>
+<div class="os-panel" id="os-windows">
+<h3>Windows</h3>
+<div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> PowerShell</span><button class="copy" type="button" aria-label="Copy PowerShell code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1</code></pre></div></div>
+<div class="os-panel" id="os-macos">
+<h3>macOS</h3>
+<div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>python3 -m venv .venv
+source .venv/bin/activate</code></pre></div></div>
+<div class="os-panel" id="os-linux">
+<h3>Linux</h3>
+<div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>python3 -m venv .venv
+source .venv/bin/activate</code></pre></div></div>
+<div class="os-panel" id="os-conda">
+<h3>Conda</h3>
+<div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>conda create -n nlp-docs python=3.11
+conda activate nlp-docs</code></pre></div></div>
+</section>
+<section class="doc-section" id="install">
+<h2>Install the package</h2><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>python -m pip install nlp-text-preprocessing</code></pre></div><p>Add extras only for the features you use. Put the extra name in brackets, and quote it so zsh does not expand it.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>python -m pip install &quot;nlp-text-preprocessing[pandas,sklearn]&quot;</code></pre></div><div class="table-wrap"><table class="ref-table"><thead><tr><th scope="col">Extra</th><th scope="col">Installs</th><th scope="col">Enables</th></tr></thead><tbody><tr><td>Core (always)</td><td>spaCy, TextBlob, NLTK, BeautifulSoup, lxml, emoji, langdetect</td><td>All cleaning, language and moderation functions</td></tr><tr><td><code>pandas</code></td><td>pandas</td><td><code>text_stats_batch</code>, <code>Pipeline.run_series</code></td></tr><tr><td><code>viz</code></td><td>wordcloud, matplotlib</td><td><code>get_wordcloud</code></td></tr><tr><td><code>sklearn</code></td><td>scikit-learn</td><td><code>TextPreprocessor</code></td></tr><tr><td><code>transformers</code></td><td>transformers</td><td>Tokenizers for <code>truncate_text</code> and <code>chunk_text</code></td></tr><tr><td><code>all</code></td><td>pandas, wordcloud, matplotlib, scikit-learn</td><td>Everything above except transformers</td></tr></tbody></table></div><p>Check the installed version:</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">from</span> importlib.metadata <span class="kw">import</span> version
+<span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+print(version(<span class="str">&quot;nlp-text-preprocessing&quot;</span>))
+print(tp.__version__)</code></pre><div class="result"><span>Output</span><samp>0.5.1
+0.5.1</samp></div></div><aside class="note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0 M12 11v6 M12 7h.01"/></svg>
+<div>Importing the package downloads nothing, and <code>import nlp_text_preprocessing</code> stays fast because spaCy, TextBlob and NLTK load on first use.</div></aside></section>
+<section class="doc-section" id="resources">
+<h2>Models &amp; resources</h2><p>Counting words and normalizing whitespace need no extra data. Language functions use a spaCy model and NLTK corpora. Install them once while you are online:</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+tp.download_nltk_packages()</code></pre></div><p>This fetches the NLTK data (<code>punkt_tab</code>, <code>wordnet</code>, <code>omw-1.4</code>) and the spaCy model <code>en_core_web_sm</code>. Add <code>include_sentiment_corpus=True</code> for the legacy Naive Bayes sentiment method. To install the spaCy model yourself:</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>python -m spacy download en_core_web_sm</code></pre></div><h3>Check what is installed</h3><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
+
+print(tp.check_resources())</code></pre><div class="result"><span>Output</span><samp>{&#x27;spacy_model&#x27;: True, &#x27;nltk&#x27;: {&#x27;punkt_tab&#x27;: True, &#x27;wordnet&#x27;: True, &#x27;omw-1.4&#x27;: True}}</samp></div></div><p>The same check is available from the terminal, and <code>--download</code> installs whatever is missing.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>nlp-prep resources
+nlp-prep resources --download</code></pre></div><h3>Automatic download</h3><p>By default nothing is downloaded behind your back. Set this variable to let <code>get_spacy_nlp()</code> fetch a missing model on first use, which is handy in notebooks and CI.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="comment"># macOS / Linux</span>
+export NLP_TEXT_PREPROCESSING_AUTO_DOWNLOAD=1
+
+<span class="comment"># PowerShell</span>
+$env:NLP_TEXT_PREPROCESSING_AUTO_DOWNLOAD = &quot;1&quot;</code></pre></div><div class="table-wrap"><table class="ref-table"><thead><tr><th scope="col">Resource</th><th scope="col">Used by</th></tr></thead><tbody><tr><td>spaCy <code>en_core_web_sm</code></td><td><code>lemmatize</code>, <code>convert_to_base</code>, <code>clean_text</code>, <code>extract_entities</code>, <code>extract_pos_tags</code>, <code>get_dependency_tree</code>, <code>chunk_noun_phrases</code>, <code>singularize_words</code>, <code>pluralize_words</code>, <code>mask_pii(names=True)</code>, <code>get_stop_words</code></td></tr><tr><td>NLTK <code>punkt_tab</code>, TextBlob corpora</td><td><code>sentiment_analysis</code>, <code>polarity_subjectivity</code>, <code>correct_spelling</code>, <code>get_noun_phrase</code>, <code>extract_features</code></td></tr><tr><td>NLTK <code>wordnet</code>, <code>omw-1.4</code></td><td><code>get_synonyms</code>, <code>get_antonyms</code></td></tr><tr><td>NLTK <code>movie_reviews</code> (optional)</td><td><code>sentiment_analysis(method=&#x27;naive_bayes&#x27;)</code></td></tr></tbody></table></div><aside class="note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0 M12 11v6 M12 7h.01"/></svg>
+<div>Some NLTK versions ask for <code>averaged_perceptron_tagger_eng</code> for part-of-speech tagging. If it is missing, run <code>python -m nltk.downloader averaged_perceptron_tagger_eng</code>.</div></aside><a class="onward" href="index.html#quick-start">Try the quick start<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></a></section>
+</article>
+<nav class="page-outline" aria-label="On this page">
+<h2>On this page</h2><a href="#environment">Create an environment</a>
+<a href="#install">Install the package</a>
+<a href="#resources">Models &amp; resources</a></nav></div>
+<footer><span><span class="mark" aria-hidden="true"></span> nlp-text-preprocessing v0.5.1</span><a href="https://udityanarayantiwari.netlify.app/">Uditya Narayan Tiwari <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></footer></div></main></div>
+<dialog class="search-dialog" aria-labelledby="search-title">
+<div class="search-head">
+<h2 id="search-title">Search documentation</h2><button class="icon-btn close-search" aria-label="Close search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14 M19 5 5 19"/></svg></button></div>
+<label class="search-field"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 16l5 5 M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0"/></svg><input type="search" name="docs-search" autocomplete="off" spellcheck="false" placeholder="Try pipeline or word_count…" aria-label="Search guides and API functions"></label><p class="search-status" role="status"></p>
+<div class="results"></div></dialog>
+</body></html>

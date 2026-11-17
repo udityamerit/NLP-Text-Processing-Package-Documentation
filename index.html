@@ -1,273 +1,93 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('docs-theme');
-            if (saved) {
-                document.documentElement.setAttribute('data-theme', saved);
-            }
-        })();
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nlp-text-preprocessing — Documentation</title>
-    <meta name="description" content="Production-grade, modular Python library designed to streamline text cleaning, feature extraction, and linguistic analysis. 60+ functions, crash-proof pipeline.">
-    <meta name="keywords" content="NLP, nlp-text-preprocessing, text preprocessing, Python, natural language processing, pandas, pipeline, tokenization, lemmatization">
-    <meta property="og:title" content="nlp-text-preprocessing — Documentation">
-    <meta property="og:description" content="Production-grade Python NLP library. 60+ functions, 1-line pipeline, 100% DataFrame safe.">
-    <meta property="og:type" content="website">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="nlp_logo.png">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="index.css">
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareSourceCode",
-      "name": "nlp-text-preprocessing",
-      "description": "Production-grade, modular Python library for NLP text cleaning, feature extraction, and linguistic analysis.",
-      "programmingLanguage": "Python",
-      "url": "https://pypi.org/project/nlp-text-preprocessing/"
-    }
-    </script>
-</head>
-<body>
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress" aria-hidden="true"></div>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · nlp-text-preprocessing</title><meta name="theme-color" content="#ffffff"><meta name="color-scheme" content="light dark"><meta name="description" content="Documentation for nlp-text-preprocessing 0.5.1: text cleaning, feature extraction, pipelines and transformer-ready text preparation in Python.">
+<link rel="icon" href="mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="index.css">
+<script>try { if (localStorage.getItem('docs-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch {}</script>
+<script src="search-index.js" defer></script><script src="app.js" defer></script>
+<noscript><style>.menu,.search-open,.theme,.copy{display:none}</style></noscript>
+</head><body>
+<a href="#main-content" class="skip">Skip to content</a>
+<header class="top"><button class="icon-btn menu" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18 M3 12h18 M3 18h18"/></svg></button>
+<a class="brand" translate="no" href="index.html"><span class="mark" aria-hidden="true"></span><span>nlp-text-preprocessing</span></a><span class="header-tag">Docs</span>
+<div class="utilities"><button class="search-open" aria-label="Search documentation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 16l5 5 M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0"/></svg><span>Search docs…</span><kbd>Ctrl K</kbd></button>
+<a class="repo" href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20c-4 1-4-2-6-2 M15 22v-4c0-1 0-1.6-.7-2.2 3.1-.4 6.3-1.6 6.3-7A5.3 5.3 0 0 0 19.2 5c.2-1 .2-2.3-.3-3.1 0 0-1.2-.4-3.8 1.4a14 14 0 0 0-6.3 0C6.2 1.5 5 1.9 5 1.9 4.5 3 4.5 4.2 4.8 5a5.3 5.3 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7-.6.6-.8 1.3-.8 2.2v4"/></svg><span>GitHub</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a><button class="icon-btn theme" aria-label="Switch to dark theme"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0 M12 1v3 M12 20v3 M1 12h3 M20 12h3 M4 4l2 2 M18 18l2 2 M4 20l2-2 M18 6l2-2"/></svg><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15A9 9 0 0 1 9 3a9 9 0 1 0 11 12z"/></svg></button></div></header><noscript>
+<nav class="plain-nav" aria-label="Documentation pages"><a href="index.html">Overview</a>
+<a href="installation.html">Installation</a>
+<a href="guide.html">User guide</a>
+<a href="api.html">API reference</a></nav></noscript>
+<div class="layout">
+<aside id="sidebar" class="sidebar">
+<nav aria-label="Documentation">
+<div class="nav-section">
+<h2>Getting started</h2><a href="index.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3z M9 20v-7h6v7"/></svg>Overview</a>
+<a href="installation.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12 m-5-5 5 5 5-5 M4 16v4h16v-4"/></svg>Installation</a>
+<a href="index.html#quick-start"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 2-10 12h7l-1 8L21 9h-8z"/></svg>Quick start</a></div>
+<div class="nav-section">
+<h2>User guide</h2><a href="guide.html#pipeline"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Build a pipeline</a><a href="guide.html#pandas"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Work with pandas</a><a href="guide.html#batch"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Batch processing</a><a href="guide.html#custom-steps"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Custom steps</a><a href="guide.html#save-load"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Save &amp; reuse</a><a href="guide.html#sklearn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Use with scikit-learn</a><a href="guide.html#transformers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Transformer models</a><a href="guide.html#privacy"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Mask personal data</a><a href="guide.html#moderation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Moderate content</a><a href="guide.html#cli"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h6v5H3z M15 16h6v5h-6z M6 8v8a2 2 0 0 0 2 2h7 M13 5h5v7"/></svg>Command line</a></div>
+<div class="nav-section">
+<h2>API reference</h2><a href="api.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h7c1 0 2 1 2 2 0-1 1-2 2-2h7v15h-7c-1 0-2 1-2 2 0-1-1-2-2-2H3z M12 6v15"/></svg>All functions</a>
+<a href="api.html#setup"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Setup &amp; resources</a><a href="api.html#cleaning"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Text cleaning</a><a href="api.html#web-social"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Web, social &amp; personal data</a><a href="api.html#statistics"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Counts &amp; statistics</a><a href="api.html#language"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Language analysis</a><a href="api.html#moderation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Sentiment &amp; moderation</a><a href="api.html#transformers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Transformer-model preparation</a><a href="api.html#pipelines"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Pipelines &amp; extensions</a><a href="api.html#visualization"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Visualization</a><a href="api.html#cli"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg>Command line</a></div>
+<div class="nav-section project">
+<h2>Project</h2><a href="https://pypi.org/project/nlp-text-preprocessing/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 7 9-5 9 5-9 5z M3 7v10l9 5 9-5V7 M12 12v10 M7 5l9 5"/></svg>PyPI package<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 20c-4 1-4-2-6-2 M15 22v-4c0-1 0-1.6-.7-2.2 3.1-.4 6.3-1.6 6.3-7A5.3 5.3 0 0 0 19.2 5c.2-1 .2-2.3-.3-3.1 0 0-1.2-.4-3.8 1.4a14 14 0 0 0-6.3 0C6.2 1.5 5 1.9 5 1.9 4.5 3 4.5 4.2 4.8 5a5.3 5.3 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7-.6.6-.8 1.3-.8 2.2v4"/></svg>Source code<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing/blob/main/CHANGELOG.md"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5"/></svg>Changelog<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a>
+<a href="https://pepy.tech/projects/nlp-text-preprocessing"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v17h18 M7 15l4-5 4 2 5-7"/></svg>Download statistics<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></div></nav>
+<a class="release" href="https://pypi.org/project/nlp-text-preprocessing/0.5.1/"><span class="release-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5"/></svg></span><span>Package version<small>v0.5.1</small></span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></aside>
+<main id="main-content" tabindex="-1">
+<div class="content">
+<nav class="crumb" aria-label="Breadcrumb"><a href="index.html">Docs</a><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><span>Getting started</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg><strong aria-current="page">Overview</strong></nav>
+<section class="hero">
+<div class="hero-copy">
+<h1 id="hero-heading">Text preprocessing<br>in Python</h1>
+<p>Clean raw text, build reusable pipelines and extract features, for classic NLP and transformer models.</p>
+<div class="hero-actions"><a href="#quick-start">Run the quick start</a></div>
+<div class="metadata"><a href="https://pypi.org/project/nlp-text-preprocessing/0.5.1/"><i></i>v0.5.1</a><span>Python ≥ 3.9</span><a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing/blob/main/LICENSE">MIT license</a></div></div>
+<figure class="specimen" aria-label="Default pipeline example">
+<div class="dots"></div>
+<div class="transformation">
+<div class="sample raw"><span>Input</span><code>&lt;b&gt;Fresh   TEXT!&lt;/b&gt;</code></div>
+<a class="transform-step" href="api.html#Pipeline.default"><span aria-hidden="true">↓</span><code>Pipeline.default()</code></a>
+<div class="sample clean"><span>Output</span><samp>fresh text</samp></div></div></figure></section>
+<section class="explore" id="features">
+<h2 id="features-heading">Explore the docs</h2>
+<div class="cards"><a class="nav-card" href="installation.html">
+<div class="card-icons"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12 m-5-5 5 5 5-5 M4 16v4h16v-4"/></svg></span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></div>
+<h3>Installation</h3><p>Set up an environment, pick extras and prepare models.</p></a><a class="nav-card" href="guide.html">
+<div class="card-icons"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h7c1 0 2 1 2 2 0-1 1-2 2-2h7v15h-7c-1 0-2 1-2 2 0-1-1-2-2-2H3z M12 6v15"/></svg></span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></div>
+<h3>User guide</h3><p>Pipelines, pandas, scikit-learn, transformers and the CLI.</p></a><a class="nav-card" href="api.html">
+<div class="card-icons"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7-5 5 5 5 m10-10 5 5-5 5 m-4-14-4 18"/></svg></span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></div>
+<h3>API reference</h3><p>97 entries with parameters and runnable examples.</p></a></div></section>
+<section class="doc-section" id="quick-start">
+<h2>Quick start</h2><p>Install the package, then run a built-in pipeline on a messy string.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Terminal</span><button class="copy" type="button" aria-label="Copy Terminal code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code>python -m pip install nlp-text-preprocessing</code></pre></div><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-    <!-- Top Navigation Bar -->
-    <header class="navbar">
-        <div style="display: flex; align-items: center; gap: 16px;">
-            <button class="mobile-toggle" id="mobile-menu-btn" type="button" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
-            <a href="index.html" class="nav-brand">
-                <img src="nlp_logo.png" alt="nlp-text-preprocessing logo" class="brand-logo-img">
-                <span>nlp-text-preprocessing</span>
-            </a>
-        </div>
+text = <span class="str">&quot;&lt;b&gt;Fresh   TEXT!&lt;/b&gt;&quot;</span>
+print(tp.Pipeline.default().run(text))</code></pre><div class="result"><span>Output</span><samp>fresh text</samp></div></div><p>Use functions directly, or chain them. The last step of a pipeline may return anything, such as a count or a sentiment label.</p><div class="code-block">
+<div class="code-bar"><span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v16H3z M6 8l4 4-4 4 M13 16h4"/></svg> Python</span><button class="copy" type="button" aria-label="Copy Python code"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h12v13H8z M16 8V3H3v13h5"/></svg> <span>Copy</span></button></div>
+<pre tabindex="0" translate="no"><code><span class="kw">import</span> nlp_text_preprocessing <span class="kw">as</span> tp
 
-        <div class="nav-controls">
-            <a href="https://pepy.tech/projects/nlp-text-preprocessing?timeRange=threeMonths&category=version&includeCIDownloads=true&granularity=weekly&viewType=line&versions=Total%2C0.*"
-                target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-analytics"
-                aria-label="View PePy Analytics">
-                <i class="fas fa-chart-line" aria-hidden="true"></i>
-                <span>PePy Analytics</span>
-            </a>
-            <a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" rel="noopener noreferrer"
-                class="nav-link-btn btn-pypi" aria-label="View on PyPI">
-                <i class="fas fa-box" aria-hidden="true"></i>
-                <span>PyPI Package</span>
-            </a>
-            <a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank"
-                rel="noopener noreferrer" class="nav-link-btn btn-github" aria-label="View GitHub Repository">
-                <i class="fab fa-github" aria-hidden="true"></i>
-                <span>GitHub Repo</span>
-            </a>
-            <button class="btn-icon" id="theme-toggle-btn" type="button" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
-                <span id="theme-icon" aria-hidden="true">🌙</span>
-            </button>
-        </div>
-    </header>
+review = <span class="str">&quot;&lt;p&gt;Loved it!! Visit https://example.com for more.&lt;/p&gt;&quot;</span>
 
-    <div class="app-container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
-            <div class="sidebar-section">
-                <div class="sidebar-title">Documentation</div>
-                <ul class="sidebar-nav" role="list">
-                    <li><a href="index.html" class="sidebar-link active"><i class="fas fa-home" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Introduction &amp; Setup</span></a></li>
-                    <li><a href="guide.html" class="sidebar-link"><i class="fas fa-book-open" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Usage Guide</span></a></li>
-                    <li><a href="api.html" class="sidebar-link"><i class="fas fa-code" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>API Reference</span></a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">Quick Start</div>
-                <ul class="sidebar-nav" role="list">
-                    <li><a href="#installation" class="sidebar-link sub"><span>Installation</span></a></li>
-                    <li><a href="#features" class="sidebar-link sub"><span>Key Features</span></a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="sidebar-title">Project Links</div>
-                <ul class="sidebar-nav" role="list">
-                    <li><a href="https://udityanarayantiwari.netlify.app/" target="_blank" rel="noopener noreferrer" class="sidebar-link"><i class="fas fa-user-astronaut" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>Author Portfolio</span></a></li>
-                    <li><a href="https://pepy.tech/projects/nlp-text-preprocessing" target="_blank" class="sidebar-link"><i class="fas fa-chart-bar" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PePy Analytics</span></a></li>
-                    <li><a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" class="sidebar-link"><i class="fas fa-box" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>PyPI Package</span></a></li>
-                    <li><a href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing" target="_blank" class="sidebar-link"><i class="fab fa-github" aria-hidden="true" style="width:16px; margin-right:8px;"></i><span>GitHub Repository</span></a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <!-- Sidebar Overlay (Mobile) -->
-        <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
-
-        <!-- Main Content Area -->
-        <main class="main-content" id="main-content">
-
-            <!-- Hero Section -->
-            <section class="hero" aria-labelledby="hero-heading">
-                <div class="badge-version">
-                    <i class="fas fa-star" aria-hidden="true" style="margin-right:6px;"></i>
-                    Python Framework for NLP Cleaning
-                </div>
-                <h1 class="hero-title" id="hero-heading">
-                    <span class="gradient-text">nlp-text-preprocessing</span><br>Documentation
-                </h1>
-                <p class="hero-subtitle">
-                    A production-grade, modular Python library designed to streamline text cleaning,
-                    feature extraction, linguistic analysis, and validation. 100% crash-proof when
-                    running over Pandas DataFrames.
-                </p>
-
-                <div class="hero-cta-group" style="display: flex; justify-content: center; margin-bottom: 2.5rem; gap: 16px; flex-wrap: wrap;">
-                    <a href="guide.html" class="nav-link-btn btn-pypi" style="font-size: 1.1rem; padding: 14px 28px; border-radius: 12px; height: auto;" aria-label="Get started with the usage guide">
-                        <i class="fas fa-rocket" aria-hidden="true"></i>
-                        <span>Get Started</span>
-                    </a>
-                    <a href="https://udityanarayantiwari.netlify.app/" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-author" style="font-size: 1.1rem; padding: 14px 28px; border-radius: 12px; height: auto;" aria-label="Author Portfolio">
-                        <i class="fas fa-user-astronaut" aria-hidden="true"></i>
-                        <span>Author Portfolio</span>
-                    </a>
-                    <a href="https://pypi.org/project/nlp-text-preprocessing/" target="_blank" rel="noopener noreferrer" class="nav-link-btn btn-github" style="font-size: 1.1rem; padding: 14px 28px; border-radius: 12px; height: auto;" aria-label="View package on PyPI">
-                        <i class="fas fa-box" aria-hidden="true"></i>
-                        <span>View on PyPI</span>
-                    </a>
-                </div>
-
-                <!-- Stats Row -->
-                <div class="stats-row" role="list" aria-label="Package statistics">
-                    <div class="stat-card" role="listitem">
-                        <span class="stat-val" data-count="60" data-suffix="+">60+</span>
-                        <span class="stat-label">Functions</span>
-                    </div>
-                    <div class="stat-card" role="listitem">
-                        <span class="stat-val">1-Line</span>
-                        <span class="stat-label">Pipeline Engine</span>
-                    </div>
-                    <div class="stat-card" role="listitem">
-                        <span class="stat-val" data-count="100" data-suffix="%">100%</span>
-                        <span class="stat-label">DataFrame Safe</span>
-                    </div>
-                    <a href="https://pepy.tech/projects/nlp-text-preprocessing"
-                        target="_blank" rel="noopener noreferrer" class="stat-card"
-                        style="text-decoration: none; border: 1px solid rgba(6, 182, 212, 0.3); background: rgba(6, 182, 212, 0.05);"
-                        aria-label="View download analytics on PePy">
-                        <span class="stat-val" style="color: var(--accent-cyan);">PePy</span>
-                        <span class="stat-label">Analytics &rarr;</span>
-                    </a>
-                </div>
-            </section>
-
-            <!-- OS Platform Switcher / Installation -->
-            <section id="installation" style="margin-top: 60px;" aria-labelledby="install-heading">
-                <h2 id="install-heading">
-                    <i class="fas fa-download" aria-hidden="true" style="color: var(--accent-cyan); margin-right: 10px;"></i>
-                    Installation Guide
-                </h2>
-                <p>Choose your operating system to see the recommended installation steps. We highly recommend using a virtual environment to prevent dependency conflicts.</p>
-
-                <div class="install-hub" role="region" aria-label="OS-specific installation instructions">
-                    <div class="install-tab-bar" role="tablist" aria-label="Operating system selection">
-                        <button class="install-tab active" type="button" data-os="windows" role="tab" aria-selected="true" aria-controls="install-panel" id="tab-windows" onclick="switchInstallOS('windows')">
-                            <i class="fab fa-windows" aria-hidden="true"></i> Windows
-                        </button>
-                        <button class="install-tab" type="button" data-os="mac" role="tab" aria-selected="false" aria-controls="install-panel" id="tab-mac" onclick="switchInstallOS('mac')">
-                            <i class="fab fa-apple" aria-hidden="true"></i> macOS
-                        </button>
-                        <button class="install-tab" type="button" data-os="linux" role="tab" aria-selected="false" aria-controls="install-panel" id="tab-linux" onclick="switchInstallOS('linux')">
-                            <i class="fab fa-linux" aria-hidden="true"></i> Linux
-                        </button>
-                        <button class="install-tab" type="button" data-os="conda" role="tab" aria-selected="false" aria-controls="install-panel" id="tab-conda" onclick="switchInstallOS('conda')">
-                            <i class="fas fa-cube" aria-hidden="true"></i> Conda
-                        </button>
-                    </div>
-
-                    <div class="install-panel" id="install-panel" role="tabpanel">
-                        <div class="install-panel-top">
-                            <div class="install-panel-top-left">
-                                <div class="terminal-dots" aria-hidden="true">
-                                    <span class="dot dot-red"></span>
-                                    <span class="dot dot-yellow"></span>
-                                    <span class="dot dot-green"></span>
-                                </div>
-                                <span class="terminal-label" id="terminal-label">Windows PowerShell</span>
-                            </div>
-                            <button class="btn-copy terminal-copy-btn" id="copy-install-btn" type="button" aria-label="Copy installation command to clipboard">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-                                <span>Copy</span>
-                            </button>
-                        </div>
-                        <div class="terminal-body">
-                            <span class="terminal-prompt" id="install-prompt" aria-hidden="true">PS C:\&gt;</span>
-                            <code class="install-cmd" id="install-command" aria-label="Installation command">python -m venv venv<br>.\\venv\\Scripts\\activate<br>pip install nlp-text-preprocessing</code>
-                        </div>
-                        <p class="install-hint" id="install-subtext">Recommended for Windows PowerShell.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Key Features Grid -->
-            <section id="features" style="margin-top: 60px;" aria-labelledby="features-heading">
-                <h2 id="features-heading">
-                    <i class="fas fa-star" aria-hidden="true" style="color: var(--accent-emerald); margin-right: 10px;"></i>
-                    Key Features
-                </h2>
-                <p>Everything you need to build robust NLP preprocessing pipelines — from simple cleaning to advanced linguistic analysis.</p>
-
-                <div class="feature-grid" role="list">
-                    <article class="feature-card" role="listitem">
-                        <div class="feature-icon" aria-hidden="true"><i class="fas fa-shield-alt"></i></div>
-                        <h3 class="feature-title">Crash-Proof Pipeline</h3>
-                        <p>Automatic None/NaN input sanitation across all functions. Safely processes huge Pandas DataFrames without failing on dirty or null rows.</p>
-                        <span class="badge-success" style="margin-top: 8px;">DataFrame Safe</span>
-                    </article>
-                    <article class="feature-card" role="listitem">
-                        <div class="feature-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--accent-emerald);" aria-hidden="true"><i class="fas fa-cogs"></i></div>
-                        <h3 class="feature-title">Automation Engine</h3>
-                        <p>Chain cleaning steps by name or custom functions via <code>Pipeline(['to_lower_case', 'remove_urls', 'lemmatize'])</code> — no boilerplate needed.</p>
-                        <span class="badge-success" style="margin-top: 8px;">1-Line Pipelines</span>
-                    </article>
-                    <article class="feature-card" role="listitem">
-                        <div class="feature-icon" style="background: rgba(124, 58, 237, 0.1); color: var(--accent-violet);" aria-hidden="true"><i class="fas fa-bolt"></i></div>
-                        <h3 class="feature-title">Fast &amp; Lazy Caching</h3>
-                        <p>Efficient lazy-loading for spaCy (<code>en_core_web_sm</code>) and cached NaiveBayes sentiment analyzers to save memory and reduce startup time.</p>
-                        <span class="badge-version" style="margin-top: 8px; color: var(--accent-violet); border-color: rgba(124,58,237,0.2); background: rgba(124,58,237,0.08);">60+ Functions</span>
-                    </article>
-                </div>
-            </section>
-
-            <!-- Setup Scripts (init copy button) -->
-            <script>
-                const copyInstallBtn = document.getElementById('copy-install-btn');
-                if (copyInstallBtn) {
-                    copyInstallBtn.onclick = function() {
-                        const text = "python -m venv venv\n.\\venv\\Scripts\\activate\npip install nlp-text-preprocessing";
-                        navigator.clipboard.writeText(text).then(() => {
-                            const originalHtml = this.innerHTML;
-                            this.innerHTML = '<span style="color:var(--accent-emerald)">✓ Copied!</span>';
-                            setTimeout(() => { this.innerHTML = originalHtml; }, 2000);
-                        });
-                    };
-                }
-            </script>
-
-            <!-- Page Navigation -->
-            <nav class="page-nav" aria-label="Page navigation">
-                <a href="guide.html" class="page-nav-btn next">
-                    <span>Usage Guide</span>
-                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </nav>
-
-        </main>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
-    <script src="app.js" defer></script>
-</body>
-</html>
+pipe = tp.Pipeline([<span class="str">&quot;remove_html_tag&quot;</span>, <span class="str">&quot;remove_urls&quot;</span>, <span class="str">&quot;to_lower_case&quot;</span>, <span class="str">&quot;remove_special_chars&quot;</span>, <span class="str">&quot;sentiment_analysis&quot;</span>])
+print(pipe.run(review))
+print(tp.text_stats(<span class="str">&quot;Hello world. NLP is fun!&quot;</span>)[<span class="str">&quot;word_count&quot;</span>])</code></pre><div class="result"><span>Output</span><samp>pos
+5</samp></div></div><aside class="note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0 M12 11v6 M12 7h.01"/></svg>
+<div>The first call that needs a spaCy model, NLTK corpus or TextBlob data tells you what is missing. Run <code>tp.check_resources()</code> to see the status, or follow <a href="installation.html#resources">Models &amp; resources</a>.</div></aside><a class="onward" href="guide.html#pipeline">Build your first pipeline<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></a></section>
+<section class="doc-section" id="whats-inside">
+<h2>What is inside</h2><p>Every function takes plain text, treats <code>None</code>, <code>NaN</code> and bytes as empty text, and imports heavy libraries only when it needs them.</p><div class="table-wrap"><table class="ref-table"><thead><tr><th scope="col">Area</th><th scope="col">What it covers</th><th scope="col">Entries</th></tr></thead><tbody><tr><td><a href="api.html#setup">Setup &amp; resources</a></td><td>Check and fetch NLTK data, spaCy models and stop words.</td><td>4</td></tr><tr><td><a href="api.html#cleaning">Text cleaning</a></td><td>Case, whitespace, punctuation, numbers, stop words, contractions.</td><td>12</td></tr><tr><td><a href="api.html#web-social">Web, social &amp; personal data</a></td><td>HTML, URLs, emails, mentions, emojis, phone numbers, PII masking.</td><td>11</td></tr><tr><td><a href="api.html#statistics">Counts &amp; statistics</a></td><td>Counts, ratios, readability scores and feature tables.</td><td>21</td></tr><tr><td><a href="api.html#language">Language analysis</a></td><td>Lemmas, entities, POS tags, n-grams, keywords, WordNet, language ID.</td><td>16</td></tr><tr><td><a href="api.html#moderation">Sentiment &amp; moderation</a></td><td>Sentiment, emotion, profanity, toxicity and spam signals.</td><td>8</td></tr><tr><td><a href="api.html#transformers">Transformer-model preparation</a></td><td>Light cleaning, truncation and chunking for BERT and GPT models.</td><td>3</td></tr><tr><td><a href="api.html#pipelines">Pipelines &amp; extensions</a></td><td>Pipeline, custom steps, JSON save and load, scikit-learn transformer.</td><td>19</td></tr><tr><td><a href="api.html#cli">Command line</a></td><td>Clean files, CSV columns and stdin from the terminal.</td><td>2</td></tr></tbody></table></div></section>
+<section class="doc-section" id="whats-new">
+<h2>Recent releases</h2><div class="table-wrap"><table class="ref-table"><thead><tr><th scope="col">Version</th><th scope="col">Highlights</th></tr></thead><tbody><tr><td>0.5</td><td><code>readability_scores</code>, <code>mask_pii(names=True)</code>, faster batch lemmatization, type hints.</td></tr><tr><td>0.4</td><td>Pipeline steps with arguments, <code>save</code>/<code>load</code>, <code>TextPreprocessor</code>, <code>light_clean</code>, <code>truncate_text</code>, <code>chunk_text</code>, the <code>nlp-prep</code> CLI.</td></tr><tr><td>0.3</td><td>Lighter core install; pandas, plotting and scikit-learn became optional extras.</td></tr></tbody></table></div><a class="onward" href="https://github.com/udityamerit/Text-Processing-Package-For-Natural-Language-Processing/blob/main/CHANGELOG.md">Read the full changelog<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15 m-6-6 6 6-6 6"/></svg></a></section>
+<footer><span><span class="mark" aria-hidden="true"></span> nlp-text-preprocessing v0.5.1</span><a href="https://udityanarayantiwari.netlify.app/">Uditya Narayan Tiwari <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 18 6 M8 6h10v10"/></svg></a></footer></div></main></div>
+<dialog class="search-dialog" aria-labelledby="search-title">
+<div class="search-head">
+<h2 id="search-title">Search documentation</h2><button class="icon-btn close-search" aria-label="Close search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 5 14 14 M19 5 5 19"/></svg></button></div>
+<label class="search-field"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 16l5 5 M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0"/></svg><input type="search" name="docs-search" autocomplete="off" spellcheck="false" placeholder="Try pipeline or word_count…" aria-label="Search guides and API functions"></label><p class="search-status" role="status"></p>
+<div class="results"></div></dialog>
+</body></html>
