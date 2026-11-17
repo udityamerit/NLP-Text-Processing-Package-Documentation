@@ -182,6 +182,11 @@ main { min-width: 0; }
 .doc-section > h3 { display: flex; align-items: baseline; gap: 8px; margin: 26px 0 10px; }
 .doc-section > h3 a { color: inherit; }
 .doc-section > h3 + .code-block, .doc-section > h3 + p { margin-top: 0; }
+.doc-section > ul { margin: 0 0 14px; padding-left: 22px; max-width: 78ch; color: var(--muted); }
+.doc-section > ul li { margin: 6px 0; padding-left: 4px; }
+.doc-section > ul li::marker { color: var(--accent); }
+.doc-section > ul strong { color: var(--ink); font-weight: 600; }
+.doc-section > p strong { color: var(--ink); font-weight: 600; }
 .article-intro { padding: 14px 0 22px; }
 .article-intro h1 { font-size: clamp(36px, 4vw, 54px); line-height: 1.08; margin-bottom: 14px; letter-spacing: -.035em; }
 .article-intro p { max-width: 66ch; font-size: 17.5px; }

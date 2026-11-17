@@ -181,7 +181,9 @@ def sidebar(page: str, version: str, api_groups: list[tuple[str, str]], guide_se
 <div class="nav-section">
 <h2>Getting started</h2>{nav_link("index.html", "Overview", "home", current=page == "index")}
 {nav_link("installation.html", "Installation", "install", current=page == "installation")}
-{nav_link("index.html#quick-start", "Quick start", "bolt")}</div>
+{nav_link("index.html#why", "Why this package", "layers")}
+{nav_link("index.html#quick-start", "Quick start", "bolt")}
+{nav_link("index.html#author", "About the author", "home")}</div>
 <div class="nav-section">
 <h2>User guide</h2>{g}</div>
 <div class="nav-section">

@@ -88,6 +88,46 @@ def overview(S, B) -> str:
         ["0.4", "Pipeline steps with arguments, `save`/`load`, `TextPreprocessor`, `light_clean`, `truncate_text`, `chunk_text`, the `nlp-prep` CLI."],
         ["0.3", "Lighter core install; pandas, plotting and scikit-learn became optional extras."],
     ])
+    compare = S.table(["Aspect", "Traditional approach", "With nlp-text-preprocessing"], [
+        ["Cleaning steps", "Regular expressions copied between notebooks, each slightly different.", "Named, tested functions such as `remove_urls` and `remove_html_tag`."],
+        ["Missing values", "`None` or `NaN` in a column raises an error half way through a run.", "Every function treats `None`, `NaN`, `pd.NA` and bytes as empty text."],
+        ["Libraries", "Wire up `re`, BeautifulSoup, NLTK, spaCy and TextBlob separately, each with its own setup.", "One import and one API. Heavy libraries load only when a function needs them."],
+        ["Reuse", "The preprocessing lives in a script that is hard to share or reproduce.", "A `Pipeline` is a list of steps. Save it to JSON and load it back anywhere."],
+        ["Speed on large data", "Call the spaCy model once per document.", "`run_batch` and `run_series` use `nlp.pipe` for the spaCy steps, about 2x faster with identical output."],
+        ["Downloads", "Models and corpora are fetched silently, or fail on first use.", "Nothing downloads on its own. `check_resources()` reports what is missing and `download_nltk_packages()` fetches it once."],
+        ["Transformer models", "Aggressive classic cleaning can strip punctuation and casing that transformer models use.", "`light_clean`, `truncate_text` and `chunk_text` prepare text for transformer tokenizers."],
+    ])
+    why = (
+        "<p>Preparing text is the first step of almost every NLP or machine learning project, and it is usually written from scratch each time. "
+        "<code>nlp-text-preprocessing</code> turns that repeated work into a small, consistent toolkit: more than 60 single-purpose functions, "
+        "an extensible <code>Pipeline</code>, and defensive handling of messy input, so you spend your time on the model and not on the cleaning code.</p>"
+        "<h3>How it helps</h3>"
+        "<ul><li><strong>Faster to start.</strong> Clean, analyse and visualise text with one install and one import.</li>"
+        "<li><strong>Consistent results.</strong> The same named steps give the same output in every project and for every teammate.</li>"
+        "<li><strong>Safe on real data.</strong> Missing values and odd types do not stop a long run.</li>"
+        "<li><strong>Ready for both worlds.</strong> Use the full cleaning path for classic models, or the light path for transformers.</li></ul>"
+        "<h3>How it differs from the traditional way</h3>" + compare
+        + "<p>A typical hand-written cleaner and the same job as a pipeline:</p>"
+        + py(S, 'import re\n\ntext = "<b>Fresh   TEXT!</b> Visit https://example.com"\ntext = re.sub(r"<[^>]+>", " ", text)\n'
+                'text = re.sub(r"https?://\\S+", "", text)\ntext = re.sub(r"[^\\w\\s]", "", text)\n'
+                'text = re.sub(r"\\s+", " ", text).strip().lower()\nprint(text)', "why-traditional")
+        + py(S, IMP + 'text = "<b>Fresh   TEXT!</b> Visit https://example.com"\n'
+                'pipe = tp.Pipeline(["remove_html_tag", "remove_urls", "remove_special_chars", "remove_extra_whitespace", "to_lower_case"])\nprint(pipe.run(text))\n'
+                'print(repr(pipe.run(None)))', "why-pipeline")
+        + S.note("The sentiment, profanity, toxicity and spam helpers are transparent keyword baselines. They are useful for quick checks and exploration. Use a trained model for anything high-stakes.")
+    )
+    author = (
+        "<p>This documentation covers <strong>nlp-text-preprocessing</strong>, created and maintained by <strong>Uditya Narayan Tiwari</strong>. "
+        "The package is open source under the MIT license, so you can use it in personal, academic and commercial projects.</p>"
+        + S.table(["Where", "Link"], [
+            ["Author website", "[udityanarayantiwari.netlify.app](https://udityanarayantiwari.netlify.app/)"],
+            ["GitHub profile", "[github.com/udityamerit](https://github.com/udityamerit)"],
+            ["Source code and issues", f"[Text-Processing-Package-For-Natural-Language-Processing]({S.REPO})"],
+            ["PyPI", f"[nlp-text-preprocessing]({S.PYPI})"],
+        ])
+        + "<p>Found a bug or want a function added? Open an issue or a pull request on the source repository.</p>"
+        + onward(S, S.REPO + "/issues", "Report an issue or suggest a feature")
+    )
     body = f"""<section class="hero">
 <div class="hero-copy">
 <h1 id="hero-heading">Text preprocessing<br>in Python</h1>
@@ -103,9 +143,11 @@ def overview(S, B) -> str:
 <section class="explore" id="features">
 <h2 id="features-heading">Explore the docs</h2>
 <div class="cards">{cards}</div></section>
+{_sec(S, B, "why", "Why this package", why, "index.html", "The purpose of the package, how it helps and how it differs from hand-written text cleaning.")}
 {_sec(S, B, "quick-start", "Quick start", quick, "index.html", "Install the package and clean your first string.")}
 {_sec(S, B, "whats-inside", "What is inside", "<p>Every function takes plain text, treats <code>None</code>, <code>NaN</code> and bytes as empty text, and imports heavy libraries only when it needs them.</p>" + table, "index.html", "Overview of the function families.")}
-{_sec(S, B, "whats-new", "Recent releases", new + onward(S, S.REPO + "/blob/main/CHANGELOG.md", "Read the full changelog"), "index.html", "Release highlights for versions 0.3 to 0.5.")}"""
+{_sec(S, B, "whats-new", "Recent releases", new + onward(S, S.REPO + "/blob/main/CHANGELOG.md", "Read the full changelog"), "index.html", "Release highlights for versions 0.3 to 0.5.")}
+{_sec(S, B, "author", "About the author", author, "index.html", "Uditya Narayan Tiwari, author and maintainer of nlp-text-preprocessing.")}"""
     return _page(S, B, name="index", title="Overview", crumb=("Getting started", "Overview"), body=body,
                  description=f"Documentation for nlp-text-preprocessing {v}: text cleaning, feature extraction, pipelines and transformer-ready text preparation in Python.")
 
